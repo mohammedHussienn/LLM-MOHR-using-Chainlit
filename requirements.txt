@@ -1,0 +1,8 @@
+python-dotenv
+pyodbc
+langchain-community
+langchain-openai
+langchain-core
+pydantic
+chainlit
+openai 
