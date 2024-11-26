@@ -6,22 +6,17 @@ from langchain_community.agent_toolkits import create_sql_agent
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from pydantic import BaseModel, Field
-from typing import List, Any
+from typing import List, Any, TypedDict
 import json
 import os
 import pandas as pd
 
 load_dotenv()
 
-class Column_in_Table(BaseModel):
-    column_name: str = Field(examples=["column1", "column2"], description="The name of the column")
-    column_value: Any = Field(examples=[1, "value", 3.14], description="The value of the column")
 
-class Table(BaseModel):
-    table_data: List[Column_in_Table] = Field(examples=[
-        {"column_name": "column1", "column_value": "value1"}, 
-        {"column_name": "column2", "column_value": "value2"}],
-        description="A list of columns in the table")
+class SQLResponse(TypedDict):
+    sql_query: str
+    column_names: List[str]
 
 class DatabaseBackend:
     def __init__(self):
@@ -33,7 +28,7 @@ class DatabaseBackend:
         }
 
         self.llm_for_agent = ChatOpenAI(
-            model_name="gpt-4o", 
+            model_name="gpt-4o-2024-11-20", 
             temperature=0
         )
 
@@ -167,7 +162,11 @@ class DatabaseBackend:
             llm=self.llm_for_agent, 
             db=self.database, 
             verbose=True,
-            agent_executor_kwargs = {"handle_parsing_errors": True}
+            agent_executor_kwargs={
+                "handle_parsing_errors": True,
+                "input_format_instructions": """Do not use markdown formatting in your queries.
+                    When using sql_db_query, provide the raw SQL without any backticks or ```sql tags."""
+            }
         )
 
     def get_prompt(self, mode):
@@ -201,6 +200,9 @@ class DatabaseBackend:
     def invoke_prompt(self, mode, input_text, username):
         llm = self.get_llm(mode)
         tenant_id = self.get_tenant_id(username)
+        
+        # Define JSON parser
+        parser = JsonOutputParser(pydantic_object=SQLResponse)
 
         try:
             full_input = f"""You are a SQL query assistant. Follow these rules precisely:
@@ -210,72 +212,62 @@ class DatabaseBackend:
                 2. Return complete results (no LIMIT/TOP unless specified)
                 3. For names, always use EnglishName column
                 4. Include EnglishName when returning employee-related data
-                5. When returning any sql query, return the raw sql query, not the markdown formatting or explanations
-
-                
-                OUTPUT FORMAT:
-                1. Results must be a list of tuples:
-                   - First tuple: Exact column names from database
-                   - Following tuples: The data rows
-                2. After query execution, write "Final Answer:" followed by complete, untruncated results
-                3. If the query returns no results, write "Final Answer: I apologize, but I couldn't find the information you're looking for. Could you please rephrase your question?"
-                4. DO NOT TRUNCATE THE RESULTS, RETURN THE ENTIRE RESULT SET.
-                5. If there's an empty cell, write "None" instead of an empty string for that cell only.
-
-                EXAMPLE OUTPUT:
-                Final Answer: [('EnglishName', 'Department'), ('John Smith', 'IT'), ('Jane Doe', 'HR')]
-
+                5. Make column names user-friendly (e.g., "Employee ID" instead of "Id")
+                6. You can explore tables and check schemas as needed
+                7. When you are excuting the queries, make sure to NOT include the ```sql tags as it results in this error: 
+                ```Error: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Incorrect syntax near '`'. (102) (SQLExecDirectW)")
+                IF YOU GET THIS ERROR, REMOVE THE ```sql TAGS FROM YOUR QUERY.
+                8. Once you have determined the correct query and tested it successfully and got the results, SAY I NOW KNOW THE FINAL ANSWER AND STOP PROCESSING AND RETURN A JSON OBJECT WITH EXACTLY THIS STRUCTURE:
+                   ```json
+                   {{
+                       "sql_query": "SET CONTEXT_INFO {tenant_id}; YOUR_FINAL_SQL_QUERY",
+                       "column_names": ["Your", "Column", "Names"]
+                   }}
+                   ```
+                9. make sure to return the JSON object with the ```json tags.
                 Question: {input_text}"""
 
-            # This returns an AgentFinish object
+            # Get the response from the agent
             agent_response = self.SQLAgent.invoke(full_input)
             
-            # Let's add some debugging to see the full response
-            print("Full agent response:", agent_response)
+            # Parse the JSON response from the output
+            output = agent_response.get('output', '')
+            response_dict = parser.parse(output)
             
-            # Get the output, which is typically everything after "Final Answer:"
-            final_answer = agent_response.get('output', '')
-            print("\n\nFinal answer:", final_answer)
-            print("\n\nFinal answer type:", type(final_answer))
+            sql_query = response_dict['sql_query']
+            column_names = response_dict['column_names']
             
-            print("\n=== Debug SQL Agent Response ===")
-            print(f"Response type: {type(final_answer)}")
-            print(f"First 500 chars: {final_answer[:500]}")
-            print("=== End Debug ===\n")
-            
-            if not final_answer or "I don't know" in final_answer:
-                return "I apologize, but I couldn't find the information you're looking for. Could you please rephrase your question?"
+            print(f"\nSQL Query: {sql_query}")
+            print(f"\nColumn Names: {column_names}")
 
-            # For 'r' mode, return the SQL results directly
+            # Execute the SQL query using get_info_from_sql
+            sql_results = self.get_info_from_sql(sql_query)
+            
+            # For 'r' mode, return both results and column names
             if mode == 'r':
-                # Extract just the data portion (everything after "Final Answer:")
-                if "Final Answer:" in final_answer:
-                    data_portion = final_answer.split("Final Answer:")[1].strip()
-                    # Add print statement for debugging
-                    print("Data portion:", data_portion)
-                    return data_portion
-                # Add print statement for debugging
-                print("Final answer (no Final Answer: found):", final_answer)
-                return final_answer
+                return {
+                    'results': sql_results,
+                    'column_names': column_names  # Already a list from JSON parsing
+                }
             
             # For other modes, continue with existing LLM formatting
             prompt = self.get_prompt(mode)
             chain = prompt | llm | self.parser[mode]
             format_input = {
                 "input": input_text,
-                "sql_result": final_answer
+                "sql_result": sql_results
             }
             llm_response = chain.invoke(format_input)
-            # Add print statement for debugging
-            print("LLM Response:", llm_response)
             return llm_response
-        
+
         except Exception as e:
             error_msg = str(e)
-            print(f"Error in invoke_prompt: {error_msg}")  # Add error logging
-            if "OUTPUT_PARSING_FAILURE" in error_msg:
-                return final_answer
+            print(f"Error in invoke_prompt: {error_msg}")
             return f"Error executing query: {error_msg}"
+        
+    def get_info_from_sql(self, query):
+        result = self.database.run(query)
+        return result
         
     def create_csv(self, mode, output):
         try:
@@ -283,32 +275,31 @@ class DatabaseBackend:
                 print("\n=== Debug Create CSV ===")
                 print(f"Input type: {type(output)}")
                 
-                if isinstance(output, str):
+                if isinstance(output, dict):
+                    print("\nDictionary contents:")
+                    for key, value in output.items():
+                        print(f"\nKey: {key}")
+                        print(f"Value type: {type(value)}")
+                        print(f"Value: {value[:500] if isinstance(value, str) else value}")
+                    
                     try:
-                        # Convert string to list of tuples
-                        data_list = eval(output)
-                        print(f"\nConverted to list. Length: {len(data_list)}")
-                        print(f"First tuple: {data_list[0]}")
+                        # Extract results and column names
+                        data_list = eval(output['results'])
+                        columns = output['column_names']  # Already a list from invoke_prompt
+                        
+                        print("\nAfter processing:")
+                        print(f"Data list type: {type(data_list)}")
+                        print(f"First row: {data_list[0] if data_list else 'No data'}")
+                        print(f"Columns: {columns}")
                         
                         if not data_list:
                             return None, "No data found"
-                        
-                        # Get column names from first tuple
-                        columns = list(data_list[0])
-                        num_columns = len(columns)
-                        print(f"\nDetected {num_columns} columns: {columns}")
                         
                         # Initialize dictionary with empty lists for each column
                         table_dict = {col: [] for col in columns}
                         
                         # Populate data
-                        for row in data_list[1:]:  # Skip header tuple
-                            if len(row) != num_columns:
-                                print(f"\nWarning: Row has different length than headers")
-                                print(f"Expected {num_columns}, got {len(row)}")
-                                print(f"Row: {row}")
-                                continue
-                            
+                        for row in data_list:
                             for col_name, value in zip(columns, row):
                                 table_dict[col_name].append(value)
                         
@@ -332,25 +323,22 @@ class DatabaseBackend:
                         # Create summary message
                         num_rows = len(df)
                         summary = f"Found {num_rows} records in the data."
-                        print(f"Summary: {summary}")
-                        print("=== End Debug ===\n")
+                        print(f"\nSummary: {summary}")
                         
                         return df, summary
                         
                     except Exception as e:
-                        print(f"Error processing list of tuples: {e}")
-                        print(f"First 500 chars of input: {output[:500]}")
+                        print(f"\nError processing dictionary: {e}")
+                        print(f"Error type: {type(e)}")
                         return None, f"Error processing data: {str(e)}"
                 else:
-                    print("Input is not a string")
+                    print("Input is not a dictionary")
                     return None, "Invalid input type"
                     
             return output, "Data processed successfully"
                 
         except Exception as e:
             print(f"Error in create_csv: {e}")
-            print(f"Error type: {type(e)}")
-            print(f"Error args: {e.args}")
             return None, f"Error processing data: {str(e)}"
         
 
