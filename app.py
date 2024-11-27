@@ -80,12 +80,39 @@ async def main(message: cl.Message):
             await cl.Message("⚠️ Please select a tenant first.\n\nYou can do this by clicking on the settings gear in the left corner of the chat bar.").send()
             return
         
-        # Show thinking message
-        await cl.Message(content="🤔 Let me think about that...").send()
+        # Show initial thinking message
+        thinking_msg = cl.Message(content="🤔 Let me think about that...")
+        await thinking_msg.send()
         
-        # Get response from backend
-        response = db.invoke_prompt(mode, message.content, tenant)
-
+        # Show processing message while querying database
+        processing_msg = cl.Message(content="⚙️ Processing your request...")
+        await processing_msg.send()
+        
+        try:
+            # Get response from backend
+            response = db.invoke_prompt(mode, message.content, tenant)
+        except Exception as query_error:
+            # Remove processing messages
+            await thinking_msg.remove()
+            await processing_msg.remove()
+            
+            # Check for iteration limit error
+            if "iteration limit" in str(query_error).lower():
+                await cl.Message(
+                    content="⚠️ I apologize, but this query is too complex for me to process. Could you please try to:\n\n" +
+                    "1. Break it down into simpler questions\n" +
+                    "2. Be more specific about what you're looking for\n" +
+                    "3. Rephrase the question"
+                ).send()
+                return
+            else:
+                # Re-raise other errors to be caught by outer try-except
+                raise query_error
+            
+        # Remove both messages before sending the actual response
+        await thinking_msg.remove()
+        await processing_msg.remove()
+        
         # Handle response based on mode
         if mode == 'r':
             # Raw mode - display as table
