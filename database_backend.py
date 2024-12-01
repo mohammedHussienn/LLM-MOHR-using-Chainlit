@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import pyodbc
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_openai import ChatOpenAI
-from langchain_community.agent_toolkits import create_sql_agent
+from langchain.chains import SQLDatabaseChain
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from typing import List, Any, TypedDict
@@ -11,6 +11,24 @@ import pandas as pd
 
 load_dotenv()
 
+_DEFAULT_TEMPLATE = """You are a SQL expert. Given an input question, create a syntactically correct SQL query to run against a Microsoft SQL Server database, then look at the results and return the answer.
+
+Available Tables and Columns:
+{table_info}
+
+IMPORTANT RULES:
+1. ALWAYS start queries with: SET CONTEXT_INFO {tenant_id};
+2. For employee names, use EnglishName column
+3. Make column names user-friendly (e.g., "Employee Name" instead of "EnglishName")
+4. Return complete results (no LIMIT/TOP unless specified)
+5. ONLY use tables and columns from the schema above
+6. DO NOT make up or infer data that isn't in the results
+
+Question: {input}
+Thought: Let me break this down step by step...
+SQLQuery: Let me write a SQL query to get this information...
+
+"""
 
 class SQLResponse(TypedDict):
     """TypedDict for structuring SQL query responses.
@@ -168,16 +186,35 @@ class DatabaseBackend:
         
         self.database = SQLDatabase.from_uri(connection_string)
         
-        self.SQLAgent = create_sql_agent(
-            llm=self.llm_for_agent, 
-            db=self.database, 
-            verbose=True,
-            agent_executor_kwargs={
-                "handle_parsing_errors": True,
-                "input_format_instructions": """Do not use markdown formatting in your queries.
-                    When using sql_db_query, provide the raw SQL without any backticks or ```sql tags."""
-            }
+        # Load database schema
+        self.table_info = pd.read_csv('dbschema.csv')
+        self.schema_str = self._format_schema()
+        
+        # Initialize SQL Chain instead of SQL Agent
+        self.sql_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm_for_agent,
+            db=self.database,
+            prompt=PromptTemplate(
+                input_variables=["input", "table_info", "tenant_id"],
+                template=_DEFAULT_TEMPLATE
+            ),
+            verbose=True
         )
+
+    def _format_schema(self) -> str:
+        """Format database schema into a readable string for the prompt."""
+        schema_text = []
+        current_table = None
+        
+        for _, row in self.table_info.iterrows():
+            if current_table != row['TABLE_NAME']:
+                if current_table is not None:
+                    schema_text.append("")
+                current_table = row['TABLE_NAME']
+                schema_text.append(f"Table: {current_table}")
+            schema_text.append(f"  - {row['COLUMN_NAME']} ({row['DATA_TYPE']})")
+        
+        return "\n".join(schema_text)
 
     def get_prompt(self, mode):
         """Retrieve the prompt template for the specified mode.
@@ -251,95 +288,55 @@ class DatabaseBackend:
             Union[Dict, str]: For mode 'r': dict with results and column names
                             For other modes: formatted string response
         """
-        llm = self.get_llm(mode)
         tenant_id = self.get_tenant_id(username)
         
-        # Define JSON parser
-        parser = JsonOutputParser(pydantic_object=SQLResponse)
-
         try:
-            full_input = f"""You are a SQL query assistant. Think through this step-by-step:
-
-                REQUIRED STEPS:
-                1. Analyze the question
-                2. Determine the required tables and columns
-                3. Build the SQL query following these rules:
-                   - Start with: SET CONTEXT_INFO {tenant_id}
-                   - Return complete results (no LIMIT/TOP unless specified)
-                   - For employee names, always use EnglishName column
-                   - Include EnglishName when returning employee-related data
-                   - Make column names user-friendly (e.g., "Employee ID" instead of "Id")
-                4. YOU must see that the query returns the correct results before you return the JSON object.
-
-                IMPORTANT PROCESS RULES:
-                1. You can explore tables and check schemas as needed
-                2. After each thought, ALWAYS follow with a specific action
-                3. When you have the final query, say "I have the final query" and proceed to step 4
-                4. End your response with the JSON result format below
-
-                FINAL RETURN FORMAT:
-                Final Answer:
-                {{
-                    "sql_query": "SET CONTEXT_INFO {tenant_id}; YOUR_FINAL_SQL_QUERY",
-                    "column_names": ["Your", "Column", "Names"]
-                }}
-
-                IMPORTANT: Do NOT include ```sql or ```json tags in your response as they cause syntax errors.
-
-                Question: {input_text}
-                """
-
-            # Get the response from the agent
-            agent_response = self.SQLAgent.invoke(full_input)
+            # Use SQL Chain to get results
+            chain_response = self.sql_chain.run({
+                "input": input_text,
+                "table_info": self.schema_str,
+                "tenant_id": tenant_id
+            })
             
-            # Parse the JSON response from the output
-            output = agent_response.get('output', '')
+            # Extract SQL results from chain response
+            sql_results = chain_response.get('result', '')
             
-            # Check if the output is "I don't know" and handle it
-            if "i don't know" in output.lower():
+            # Handle empty results
+            if not sql_results or "don't know" in sql_results.lower():
                 return self.handle_unknown_response(mode, input_text)
             
-            response_dict = parser.parse(output)
-            
-            sql_query = response_dict['sql_query']
-            column_names = response_dict['column_names']
-            
-            # Execute the SQL query using get_info_from_sql
-            sql_results = self.get_info_from_sql(sql_query)
-            
-            # For 'r' mode, return both results and column names
+            # Process results based on mode
             if mode == 'r':
                 return {
                     'results': sql_results,
-                    'column_names': column_names
+                    'column_names': self._extract_column_names(sql_results)
                 }
             
-            # For informative or conversational modes, if SQL results indicate "don't know"
-            if "don't know" in sql_results.lower():
-                prompt = self.get_prompt(mode)
-                chain = prompt | llm | self.parser[mode]
-                format_input = {
-                    "input": input_text,
-                    "sql_result": "I don't have specific data from the database for this query, but I'll help you with what I know."
-                }
-                llm_response = chain.invoke(format_input)
-                return llm_response
-            
-            # Normal processing for other cases
+            # For informative or conversational modes
+            llm = self.get_llm(mode)
             prompt = self.get_prompt(mode)
             chain = prompt | llm | self.parser[mode]
             format_input = {
                 "input": input_text,
                 "sql_result": sql_results
             }
-            llm_response = chain.invoke(format_input)
-            return llm_response
+            return chain.invoke(format_input)
 
         except Exception as e:
-            error_msg = str(e)
-            print(f"Error in invoke_prompt: {error_msg}")
+            print(f"Error in invoke_prompt: {str(e)}")
             return self.handle_unknown_response(mode, input_text)
-        
+
+    def _extract_column_names(self, sql_results: str) -> List[str]:
+        """Extract column names from SQL results."""
+        try:
+            # Assuming results are in a format we can evaluate
+            data = eval(sql_results)
+            if data and len(data) > 0:
+                return [desc[0] for desc in data[0].description]
+        except:
+            pass
+        return []
+
     def get_info_from_sql(self, query):
         """Execute a SQL query and return the results.
 

@@ -1,0 +1,9017 @@
+[
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "Major",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "University",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "AcademicDegreeTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "GradeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegrees",
+    "COLUMN_NAME": "DegreeDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "AcademicDegreeTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegreeTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AcademicDegreeTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AcademicDegreeTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "Effect",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "ItemEquationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "ValueActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Activities",
+    "COLUMN_NAME": "IsSingleRecord",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "ActivityAlerts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ActivityAlerts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ActivityAlerts",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ActivityAlerts",
+    "COLUMN_NAME": "AlertTypes",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "AddressText",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "POBox",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "ZipCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "AddressType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "DistrictId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Addresses",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "From",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "To",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AppraisalGrades",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AppraisalSchedules",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppraisalSchedules",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppraisalSchedules",
+    "COLUMN_NAME": "Period",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppraisalSchedules",
+    "COLUMN_NAME": "Start",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "AppraisalSchedules",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "ReleaseTitle",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "ReleaseDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "ReleaseArabic",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "ReleaseEnglish",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "ReleaseApp",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AppVersions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AspNetRoles",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetRoles",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetRoles",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetRoles",
+    "COLUMN_NAME": "Action",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "AspNetRoles",
+    "COLUMN_NAME": "Discriminator",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserClaims",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AspNetUserClaims",
+    "COLUMN_NAME": "UserId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserClaims",
+    "COLUMN_NAME": "ClaimType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserClaims",
+    "COLUMN_NAME": "ClaimValue",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserLogins",
+    "COLUMN_NAME": "UserId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserLogins",
+    "COLUMN_NAME": "LoginProvider",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserLogins",
+    "COLUMN_NAME": "ProviderKey",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserRoles",
+    "COLUMN_NAME": "UserId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUserRoles",
+    "COLUMN_NAME": "RoleId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "PasswordHash",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "SecurityStamp",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LegacyPasswordHash",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LoweredUserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "MobileAlias",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "IsAnonymous",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LastActivityDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "MobilePIN",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LoweredEmail",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "PasswordQuestion",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "PasswordAnswer",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "IsApproved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "IsLockedOut",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "CreateDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LastLoginDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LastPasswordChangedDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LastLockoutDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "FailedPasswordAttemptCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "FailedPasswordAttemptWindowStart",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "FailedPasswordAnswerAttemptCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "FailedPasswordAnswerAttemptWindowStart",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "Comment",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "EmailConfirmed",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "PhoneNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "PhoneNumberConfirmed",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "TwoFactorEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LockoutEndDateUtc",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "LockoutEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "AccessFailedCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "FirstLoginDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "IsEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "IsAdmin",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "AspNetUsers",
+    "COLUMN_NAME": "UserType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "Action",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "Balance",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "VacationBalanceId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "BalanceBefore",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "TotalBalanceBefore",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "LastDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "BalanceSettlements",
+    "COLUMN_NAME": "EmployeeActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Banks",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Banks",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Banks",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Banks",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "height",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "weight",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "ChestWidth",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "HeightHarmonyId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "WeightHarmonyId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "BodyDetails",
+    "COLUMN_NAME": "SkinColorId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "BankId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "Adress",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Branches",
+    "COLUMN_NAME": "SwiftCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "Narrative",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "Currency",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "CreditorBICCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "AccountNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CIBBanks",
+    "COLUMN_NAME": "AccountName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CitizensIdentifications",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CitizensIdentifications",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CitizensIdentifications",
+    "COLUMN_NAME": "NationalId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CitizensIdentifications",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "CitizensIdentifications",
+    "COLUMN_NAME": "PassportNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CitizensIdentifications",
+    "COLUMN_NAME": "PassportEndDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "Commercialrecord",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "Taxcard",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "officailName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "LogoPath",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "HasLogo",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "InfoJson",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyInfo",
+    "COLUMN_NAME": "EmployeesCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "CompanyName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "CompanyInsuranceNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "CommercialRecordNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "CommercialRecordProcessNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "InsuranceOfficeName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "OwnerName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "CompanyLegalForm",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "Governorate",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "Department",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "Village",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "StreetName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "BuildingNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "SickPercent",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "SickStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "InjuryPercent",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "InjuryStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "StopDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "StopReason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CompanyLegalInfo",
+    "COLUMN_NAME": "ResumeDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Contacts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Contacts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Contacts",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Contacts",
+    "COLUMN_NAME": "ContactText",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Contacts",
+    "COLUMN_NAME": "ContactTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Contacts",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ContactTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ContactTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ContactTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ContactTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "EndReason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "CreateDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "IsPending",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "AlertsHandled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "SignOff",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "SettleDues",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Contracts",
+    "COLUMN_NAME": "AssignItems",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Countries",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Countries",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Countries",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Countries",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Countries",
+    "COLUMN_NAME": "ISOCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "Action",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "By",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "Result",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "CustomerId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMActivities",
+    "COLUMN_NAME": "Done",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CRMBackups",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMBackups",
+    "COLUMN_NAME": "BackUpDbEvery",
+    "DATA_TYPE": "smallint"
+  },
+  {
+    "TABLE_NAME": "CRMBackups",
+    "COLUMN_NAME": "LastDbBackupDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CRMBackups",
+    "COLUMN_NAME": "BackupFilesEvery",
+    "DATA_TYPE": "smallint"
+  },
+  {
+    "TABLE_NAME": "CRMBackups",
+    "COLUMN_NAME": "LastFilesBackupDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Role",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Phone",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "Blog",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CRMContacts",
+    "COLUMN_NAME": "CustomerId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "CompanyName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Country",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "State",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Address",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "CreatedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Mobile",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "CompanyField",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Admin",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "RegistrationReasonId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "OtherRegistrationReason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "KnowUsFrom",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Tag",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Paying",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "TenantName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "ExpirationDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "UsersNumber",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "SalesMan",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Channels",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "Password",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "JobTitle",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "ModulePriority",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "DecisionMaking",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CRMCustomers",
+    "COLUMN_NAME": "EgyptionCompany",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "CustomerId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Currency",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Method",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Amount",
+    "DATA_TYPE": "money"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Rate",
+    "DATA_TYPE": "decimal"
+  },
+  {
+    "TABLE_NAME": "CRMPayments",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMStages",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMStages",
+    "COLUMN_NAME": "StatusId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMStages",
+    "COLUMN_NAME": "Owner",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CRMStatuses",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CRMStatuses",
+    "COLUMN_NAME": "Title",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "OtherStatus",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "CustodyTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Custodies",
+    "COLUMN_NAME": "Available",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "CustodyTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CustodyTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CustodyTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CustodyTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CustodyTypes",
+    "COLUMN_NAME": "Category",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CustodyTypes",
+    "COLUMN_NAME": "OtherType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CustomFunctions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "CustomFunctions",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CustomFunctions",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CustomFunctions",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "CustomFunctions",
+    "COLUMN_NAME": "ArabicDescription",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "CustomFunctions",
+    "COLUMN_NAME": "EnglishDescription",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Defendants",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Defendants",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Defendants",
+    "COLUMN_NAME": "InvestigationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Defendants",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "ReplacedEmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Delegations",
+    "COLUMN_NAME": "UserType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "DepartmentJobTitles",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentJobTitles",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentJobTitles",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentJobTitles",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentJobTitles",
+    "COLUMN_NAME": "Number",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentJobTitles",
+    "COLUMN_NAME": "IsHead",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "DepartmentTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "ParentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Departments",
+    "COLUMN_NAME": "IsHidden",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "DepartmentTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DepartmentTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "DepartmentTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Districts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Districts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Districts",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Districts",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Districts",
+    "COLUMN_NAME": "GovernrateId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "SubmitDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "Required",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "Received",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "DocumentTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Documents",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "Required",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "IsHiring",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "DocumentTypes",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "Number",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "ReleaseDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "ExpirationDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "ViewPublication",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "DrivingLicenses",
+    "COLUMN_NAME": "LicenseTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EdaraTenants",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EdaraTenants",
+    "COLUMN_NAME": "Token",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "Host",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "Port",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "EmailAddress",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "Password",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "SslEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Emails",
+    "COLUMN_NAME": "SendGrid",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "ExecutionDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "Comment",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "CreateDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "SalaryItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "ValueToCalculate",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "Tag",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "LoanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeActivities",
+    "COLUMN_NAME": "ValueActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "Start",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "End",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "EmployeeEvaluationTemplateId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "Feedback",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeAppraisals",
+    "COLUMN_NAME": "DevPlan",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeBanks",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeBanks",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeBanks",
+    "COLUMN_NAME": "BranchId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeBanks",
+    "COLUMN_NAME": "AccountNum",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeBanks",
+    "COLUMN_NAME": "PplSoftId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeBanks",
+    "COLUMN_NAME": "AccountType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeCodes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeCodes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeCodes",
+    "COLUMN_NAME": "Length",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "EmployeeCodes",
+    "COLUMN_NAME": "Prefix",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "CustodyId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "DeliveryDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "DateOfReceipt",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeCustodies",
+    "COLUMN_NAME": "EmployeeActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "EvaluationTemplateId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "TotalEvaluationValue",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluations",
+    "COLUMN_NAME": "FlgStatus",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluationTemplates",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluationTemplates",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluationTemplates",
+    "COLUMN_NAME": "From",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluationTemplates",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluationTemplates",
+    "COLUMN_NAME": "Employees",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeEvaluationTemplates",
+    "COLUMN_NAME": "EvaluationTemplateId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "ImageUrl",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "IsApproved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "MasterFaceId",
+    "DATA_TYPE": "uniqueidentifier"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "FacePersonId",
+    "DATA_TYPE": "uniqueidentifier"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "FacePersonGroupId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "EmployeeFaceIds",
+    "COLUMN_NAME": "RecognitionModel",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeGroupsEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeGroupsEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeGroupsEmployees",
+    "COLUMN_NAME": "EmployeeGroupId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "SocialNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "RegisterDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "BasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "RegisterSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "TotalSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "MonthlyPercentage",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "QualificationName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "Code1",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "Code2",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "JobTitle",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "Nationality",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "NationalId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "PassportNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "PermitStatus",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "PermitNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeInsurances",
+    "COLUMN_NAME": "WorkingDuration",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "EquationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "ExpenseAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "AccrualAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeItems",
+    "COLUMN_NAME": "CostCenter",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "NationalId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "HasImage",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "ActualWorkingDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "DepartmentArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "DepartmentEnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "JobTitleArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "JobTitleEnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeJobs",
+    "COLUMN_NAME": "IsHead",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeeLocations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeLocations",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeLocations",
+    "COLUMN_NAME": "LocationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeLocations",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "EmployeeLocations",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "PlanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "FromDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "ToDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeMultiPlans",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeePlans",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeePlans",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeePlans",
+    "COLUMN_NAME": "FromDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeePlans",
+    "COLUMN_NAME": "ToDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeePlans",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeePlans",
+    "COLUMN_NAME": "PlanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeePortal",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeePortal",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequestReviewCycles",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequestReviewCycles",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequestReviewCycles",
+    "COLUMN_NAME": "RequestReviewCycleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequests",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequests",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequests",
+    "COLUMN_NAME": "RequestTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeRequests",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "Active",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "PicPath",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "NationalId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "BirthDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ArabicFirstName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ArabicSecondName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ArabicFamilyName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EnglishFirstName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EnglishSecondName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EnglishFamilyName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "BloodGroup",
+    "DATA_TYPE": "nchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "MaritalDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "SubjectToInsurance",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "SocialId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "MaritalStatusId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ReligionId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "GenderId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "CountryId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ExtendedData",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "Phone",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EmergencyNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EmployeeBankId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "OtherReligion",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "IsTrusted",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "HasEpAccount",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "HasImage",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "EssPassword",
+    "DATA_TYPE": "nchar"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "WowDeskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Employees",
+    "COLUMN_NAME": "IsSuspended",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "EmployeesCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "SystemHealth",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "EmployeeStored",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "EmployeePercentage",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "UndeliverdDoc",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "BasicData",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "JobData",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "TurnoverMeter3Mon",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "TurnoverMeter6Mon",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "TurnoverMeter12Mon",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "LeavingEmployeesCount3",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "LeavingEmployeesCount12",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "NewEmployeesCount12",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "Vacancy",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "JobTitleCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "Citizens",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "BirthDateThisMonth",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesDashboard",
+    "COLUMN_NAME": "LastUpdate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "Service",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "BeforeDiscount",
+    "DATA_TYPE": "decimal"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "AfterDiscount",
+    "DATA_TYPE": "decimal"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "CreatedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "EmployeeProviderId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeServices",
+    "COLUMN_NAME": "ServiceProviderId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesGroups",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesGroups",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeesGroups",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeesGroups",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EmployeesGroups",
+    "COLUMN_NAME": "GroupTypes",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeTimeTables",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeTimeTables",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeTimeTables",
+    "COLUMN_NAME": "PlanDetailId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EmployeeTimeTables",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "Text",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "ExcOrder",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "IsDefault",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Equations",
+    "COLUMN_NAME": "IsArchived",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "EnableEssEmployeeEdit",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "PrintAttendance",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "EnableTimeSheet",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "FinancialRequestId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EssSettings",
+    "COLUMN_NAME": "OnlyByDayVacation",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "EmployeeEvaluationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "KPIId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "FromDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "EvaluationValue",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "PercentageWeight",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Evaluations",
+    "COLUMN_NAME": "ToDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplateKPIs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplateKPIs",
+    "COLUMN_NAME": "EvaluationTemplateId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplateKPIs",
+    "COLUMN_NAME": "KPIId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplateKPIs",
+    "COLUMN_NAME": "Weight",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "Period",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "EvaluationTemplates",
+    "COLUMN_NAME": "Categories",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "Boss",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "Order",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "Kpis",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Evaluators",
+    "COLUMN_NAME": "EmployeeEvaluationTemplateId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "EventName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "EventRec",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "EventDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "FontColor",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "BackgroundColor",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Events",
+    "COLUMN_NAME": "EventNameEn",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "PreviousPosition",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "Organization",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Experiences",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExperienceValues",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExperienceValues",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExperienceValues",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "ExperienceValues",
+    "COLUMN_NAME": "Year",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExperienceValues",
+    "COLUMN_NAME": "RankId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "DurationFrom",
+    "DATA_TYPE": "nchar"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "DurationTo",
+    "DATA_TYPE": "nchar"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "Hours",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "FormDeliveryDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkings",
+    "COLUMN_NAME": "ExtraWorkingTimeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkingTimes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkingTimes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkingTimes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ExtraWorkingTimes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "BirthDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "RelationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "MaritalStatus",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "IdNumber",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "RelationDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "FamilyMembers",
+    "COLUMN_NAME": "CountryId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "Path",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "IsDocument",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "DocumentTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Files",
+    "COLUMN_NAME": "IsAttached",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Footers",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Footers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Footers",
+    "COLUMN_NAME": "ArabicTemplate",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Footers",
+    "COLUMN_NAME": "EnglishTemplate",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "Title",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "IsAllDay",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "StartTime",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "FormalVacations",
+    "COLUMN_NAME": "EndTime",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "FormDataHistories",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FormDataHistories",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "FormDataHistories",
+    "COLUMN_NAME": "Url",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "FormDataHistories",
+    "COLUMN_NAME": "FormData",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "FormDataHistories",
+    "COLUMN_NAME": "Username",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Genders",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Genders",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Genders",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Genders",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Governrates",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Governrates",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Governrates",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Governrates",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Governrates",
+    "COLUMN_NAME": "CountryId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Grades",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Grades",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Grades",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Grades",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HeightHarmonies",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "HeightHarmonies",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "HeightHarmonies",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HeightHarmonies",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HireTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "HireTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "HireTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HireTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Holidays",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Holidays",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Holidays",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Holidays",
+    "COLUMN_NAME": "BDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Holidays",
+    "COLUMN_NAME": "Days",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Holidays",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "PaymentType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "DebitAccountNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "DebitAccountCountry",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "DebitAccountCurrency",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "TransactionCurrency",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "BeneCountryCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "SecondPartyReference",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "HSBCSettings",
+    "COLUMN_NAME": "LCCCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Identifications",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Identifications",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Identifications",
+    "COLUMN_NAME": "ResidenceNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Identifications",
+    "COLUMN_NAME": "PassportNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Identifications",
+    "COLUMN_NAME": "ResidenceEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Identifications",
+    "COLUMN_NAME": "PassportEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Identities",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Identities",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Identities",
+    "COLUMN_NAME": "TableName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Identities",
+    "COLUMN_NAME": "TableId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "EventName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "DateTime",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "SystemCalender",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "ImportantDates",
+    "COLUMN_NAME": "EmployeePortal",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "InstitutionNumber",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Area",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Office",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "InstitutionName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Owner",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "DirectorInCharge",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "PropertyID",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "StreetName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Xiahe",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Village",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Section",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Station",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "Governorate",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "StopDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "ContinueDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "StopReason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "StartActivity",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceDocuments",
+    "COLUMN_NAME": "InstitutionLegalForm",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "BasicItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "SubscriptionItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "TotalItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "BasicValue",
+    "DATA_TYPE": "decimal"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "SubscriptionValue",
+    "DATA_TYPE": "decimal"
+  },
+  {
+    "TABLE_NAME": "InsuranceEmployeeSalaries",
+    "COLUMN_NAME": "TotalValue",
+    "DATA_TYPE": "decimal"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "Year",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "MinBasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "MaxBasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "MinSubscriptionFee",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "MaxSubscriptionFee",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "RetirementAge",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceLimits",
+    "COLUMN_NAME": "LastModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "InsuranceOfficeEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceOfficeEmployees",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceOfficeEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceOfficeEmployees",
+    "COLUMN_NAME": "InsuranceOfficeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceOffices",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceOffices",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceOffices",
+    "COLUMN_NAME": "OfficeName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "BasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "VariableSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "InsuranceType_Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "SubscriptionFee",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "Minimum",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "Maximum",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "Retirementage",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Insurances",
+    "COLUMN_NAME": "LastModifiedDate",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "InsuranceTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "InsuranceTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "InsuranceTypes",
+    "COLUMN_NAME": "DeductionOfBasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "InsuranceTypes",
+    "COLUMN_NAME": "DeductionOfVariableSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "IntegrationTransactions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "IntegrationTransactions",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "IntegrationTransactions",
+    "COLUMN_NAME": "TransactionType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "IntegrationTransactions",
+    "COLUMN_NAME": "IsOvertime",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "IntegrationTransactions",
+    "COLUMN_NAME": "LastReadingDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "IntegrationTransactions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "Number",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "Subject",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "Result",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Investigations",
+    "COLUMN_NAME": "ViolationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigators",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigators",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigators",
+    "COLUMN_NAME": "InvestigationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Investigators",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ItemEffects",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ItemEffects",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ItemEffects",
+    "COLUMN_NAME": "ArName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ItemEffects",
+    "COLUMN_NAME": "EnName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ItemPackages",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ItemPackages",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ItemPackages",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ItemPackages",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "DefaultValue",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "MeasureUnitId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "ItemEffectId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "CalculatedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "ExpenseAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "AccrualAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "CostCenter",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Items",
+    "COLUMN_NAME": "ShowOnPaySlip",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "JobAreaDepartments",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreaDepartments",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreaDepartments",
+    "COLUMN_NAME": "JobAreaId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreaKpis",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreaKpis",
+    "COLUMN_NAME": "KpiId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreaKpis",
+    "COLUMN_NAME": "JobAreaId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreas",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreas",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobAreas",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobAreas",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "DecreeNo",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "DecreeFromDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "JobTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "HireTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "SalaryGrade",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "DecreeToDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "ContractStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "ContractEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistories",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "JobTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "ActualWorkingDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "ContractStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "ContractEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "UserAction",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobHistoryLogs",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "CommitteeNo",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "CommitteeDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "DecreeNo",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "DecreeDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ContractStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ContractEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ActualWorkingDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "RatePerHour",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "MonthlySalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "HireTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "JobTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "SkillId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ExperienceValueId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "RankId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "VacationStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "TestEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "IsHead",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "HourlyRate",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Jobs",
+    "COLUMN_NAME": "ActualEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "JobTitleItemPackages",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleItemPackages",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleItemPackages",
+    "COLUMN_NAME": "ItemPackageId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleItemPackages",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleItemPackages",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitlePlans",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitlePlans",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitlePlans",
+    "COLUMN_NAME": "PlanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitlePlans",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitlePlans",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitles",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitles",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitles",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobTitles",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobTitles",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobTitles",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobTitleVacationTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleVacationTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleVacationTypes",
+    "COLUMN_NAME": "VacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleVacationTypes",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTitleVacationTypes",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "JobTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "JobTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "Period",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "KpiCategories",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "KpiId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "EvaluatorId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "Weight",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "EmployeeAppraisalId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "Feedback",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KpiEvaluations",
+    "COLUMN_NAME": "DevPlan",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KpiJobTitles",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiJobTitles",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiJobTitles",
+    "COLUMN_NAME": "KpiId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiJobTitles",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KpiJobTitles",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "Period",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "JobAreaId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "CategoryId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "KPIs",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "LicenseTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LicenseTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LicenseTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "LicenseTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "LoanTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "Installments",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "IsRequest",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "JournalCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Loans",
+    "COLUMN_NAME": "RequestId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSettings",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSkippedMonths",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSkippedMonths",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSkippedMonths",
+    "COLUMN_NAME": "LoanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanSkippedMonths",
+    "COLUMN_NAME": "Month",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "LoanTypeEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypeEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypeEmployees",
+    "COLUMN_NAME": "LoanTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "DurationBeforeDeserve",
+    "DATA_TYPE": "smallint"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "MaxNoOfPayments",
+    "DATA_TYPE": "smallint"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "AllowMultiple",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "Percentage",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "ExpenseAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "AccrualAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "CostCenter",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "LoanTypes",
+    "COLUMN_NAME": "CalculateCurrentSalary",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "Latitude",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "Longitude",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "DistanceRangeInMeters",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Locations",
+    "COLUMN_NAME": "TimeZoneId",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "MachineCommands",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachineCommands",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachineCommands",
+    "COLUMN_NAME": "SerialNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MachineCommands",
+    "COLUMN_NAME": "Command",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MachineCommands",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "MachineId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "Stamp",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "Delay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "Encrypt",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "ErrorDelay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "OpStamp",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "Realtime",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "TransFlag",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "TransInterval",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "TransTimes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MachinePushApiSettings",
+    "COLUMN_NAME": "TimeZone",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "SerialNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "Stamp",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "Delay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "Encrypt",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "ErrorDelay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "OpStamp",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "Realtime",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "TransFlag",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "TransInterval",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "TransTimes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "TimeZone",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "MachineUploadMethod",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "UseTransactionType",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Machines",
+    "COLUMN_NAME": "TransactionType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "MachineId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "IP",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "Port",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "Password",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "IsBlackAndWhite",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "MachineSdkSettings",
+    "COLUMN_NAME": "MachineBrand",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "VacationBalanceId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ManualVacationBalances",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MaritalStatuses",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MaritalStatuses",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MaritalStatuses",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MaritalStatuses",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MeasureUnits",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MeasureUnits",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MeasureUnits",
+    "COLUMN_NAME": "ArName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MeasureUnits",
+    "COLUMN_NAME": "EnName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MeasureUnits",
+    "COLUMN_NAME": "MeasureUnitTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MeasureUnitTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MeasureUnitTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MeasureUnitTypes",
+    "COLUMN_NAME": "ArName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MeasureUnitTypes",
+    "COLUMN_NAME": "EnName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "StatusDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "MilitaryStatusId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Militaries",
+    "COLUMN_NAME": "MilitaryRenewalDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "MilitaryStatus",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MilitaryStatus",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MilitaryStatus",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MilitaryStatus",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "From",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "To",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "Destination",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "IsRequest",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "IsApproved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "Unit",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "RequestId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "TimeTables",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Missions",
+    "COLUMN_NAME": "ModifyDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "MissionTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MissionTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MissionTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MissionTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MobileAppSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileAppSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileAppSettings",
+    "COLUMN_NAME": "ImageVerificationMode",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "MobileAppSettings",
+    "COLUMN_NAME": "LocationVerificationMode",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Time",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "IsTrusted",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Latitude",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Longitude",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Guid",
+    "DATA_TYPE": "uniqueidentifier"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "LocationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "VerificationStatus",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "Username",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "UnverfiedMasterImageUrl",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MobileTransactionPools",
+    "COLUMN_NAME": "IsApproved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "MonthlyTimeSheets",
+    "COLUMN_NAME": "IsSubmitted",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Nationalities",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Nationalities",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Nationalities",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Nationalities",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Title",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Details",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Seen",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "CancellationReason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "EmployeeActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Notifications",
+    "COLUMN_NAME": "Attachments",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "EntityName",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "Error",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "EmployeeCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "IntegrationDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationErrors",
+    "COLUMN_NAME": "TransactionCode",
+    "DATA_TYPE": "bigint"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "MohrId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "OracleId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "EntityName",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "LastModificationDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "GroupId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "AssignmentId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "IsDeleted",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrations",
+    "COLUMN_NAME": "IsLocked",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServiceLoggers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServiceLoggers",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServiceLoggers",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServiceLoggers",
+    "COLUMN_NAME": "Username",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServiceLoggers",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServices",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServices",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OracleIntegrationServices",
+    "COLUMN_NAME": "ServiceStatus",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "OrganizationSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OrganizationSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "OrganizationSettings",
+    "COLUMN_NAME": "AutoSubscriptionFee",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "OrganizationSettings",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "EquationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "ItemPackageId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "ExpenseAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "AccrualAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PackageItems",
+    "COLUMN_NAME": "CostCenter",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PayrollSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PayrollSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PayrollSettings",
+    "COLUMN_NAME": "SubscriptionFeeItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PayrollSettings",
+    "COLUMN_NAME": "ShowActivities",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "PayrollSettings",
+    "COLUMN_NAME": "SalaryCalculationStartDay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PayrollSettings",
+    "COLUMN_NAME": "HideNetSalaryFromESS",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Penalties",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Penalties",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Penalties",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Penalties",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Penalties",
+    "COLUMN_NAME": "DeductedAmount",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "PenaltyReasons",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PenaltyReasons",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PenaltyReasons",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "PenaltyReasons",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "PermissionType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "IsRequest",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "From",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "To",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "PlanDetailId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "RequestId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "ModifyDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "FromDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Permissions",
+    "COLUMN_NAME": "ToDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "PermissionSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PermissionSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PermissionSettings",
+    "COLUMN_NAME": "NumberPerMonth",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "PermissionSettings",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PermissionSettings",
+    "COLUMN_NAME": "PermissionType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "PermissionSettings",
+    "COLUMN_NAME": "IsAllowed",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "AttendStart",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "AttendExact",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "AttendEnd",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "LeaveStart",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "LeaveExact",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "LeaveEnd",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "PlanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "TimeTableId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "IsAbsenceChecked",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "IsLeaveChecked",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "Border",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "IsVacation",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "IsExtended",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "MinWorkingHours",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "MaxWorkingHours",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "ShiftSettingId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanDetails",
+    "COLUMN_NAME": "MaxOvertime",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "PlanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "FormalVacationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "PlanFormalVacations",
+    "COLUMN_NAME": "Title",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "ShiftId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Plans",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "PlanShifts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanShifts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanShifts",
+    "COLUMN_NAME": "PlanId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanShifts",
+    "COLUMN_NAME": "ShiftId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "PlanShifts",
+    "COLUMN_NAME": "ShiftStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "PlanShifts",
+    "COLUMN_NAME": "ShiftEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "ProjectEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ProjectEmployees",
+    "COLUMN_NAME": "ProjectId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ProjectEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ProjectEmployees",
+    "COLUMN_NAME": "HourlyRate",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "ManagerId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Projects",
+    "COLUMN_NAME": "WowDeskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Qualifications",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Qualifications",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Qualifications",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Qualifications",
+    "COLUMN_NAME": "GradeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Qualifications",
+    "COLUMN_NAME": "QualificationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Qualifications",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "QualificationTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "QualificationTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "QualificationTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "QualificationTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "ExecutionDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "Comment",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "CreateDate",
+    "DATA_TYPE": "datetime2"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "SalaryItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Query",
+    "COLUMN_NAME": "ValueToCalculate",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "CategoryNo",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "BasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "InsuranceBasicSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Ranks",
+    "COLUMN_NAME": "InsuranceVariableSalary",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "RelationTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RelationTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RelationTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RelationTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RelationTypes",
+    "COLUMN_NAME": "GenderId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Religions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Religions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Religions",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Religions",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ReportFooters",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ReportFooters",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ReportFooters",
+    "COLUMN_NAME": "FooterId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ReportFooters",
+    "COLUMN_NAME": "Report",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "RequestType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "IsDefault",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "RequestedId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewCycles",
+    "COLUMN_NAME": "SingleApprovalEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "RequestId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "IsApproved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "Reason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "Order",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "IsCurrent",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestReviewers",
+    "COLUMN_NAME": "SingleApprovalEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "RequestType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "IsApproved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "Guid",
+    "DATA_TYPE": "uniqueidentifier"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "RequestTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "IsDelivered",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "DeliveryNotes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "Attachments",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "CreatedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "RefId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Requests",
+    "COLUMN_NAME": "MonthlyTimeSheet_Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestsTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestsTypes",
+    "COLUMN_NAME": "arabicname",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestsTypes",
+    "COLUMN_NAME": "englishname",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "IsEditable",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "IsEditableByEmployee",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "RequestTypes",
+    "COLUMN_NAME": "DefaultValue",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "JobTitleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "DepartmentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "Boss",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "RequestReviewCycleId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "Order",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "RequestType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "RequestedId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Reviewers",
+    "COLUMN_NAME": "SingleApprovalEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "CreateDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "IsPaid",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "Month",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "Year",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "From",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "To",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "Label",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "PaidAmount",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "IsDelivered",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "JournalCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Salaries",
+    "COLUMN_NAME": "NeedRecalculation",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "EquationText",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "SalaryId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "IsActivityItem",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "EquationName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "ExpenseAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "AccrualAccount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "CostCenter",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "IsDelivered",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "SalaryItems",
+    "COLUMN_NAME": "JournalCode",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SalarySettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalarySettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalarySettings",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SalarySettings",
+    "COLUMN_NAME": "IsManual",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "SalarySettings",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ServiceProviders",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ServiceProviders",
+    "COLUMN_NAME": "CustomerName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ServiceProviders",
+    "COLUMN_NAME": "Services",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ServiceProviders",
+    "COLUMN_NAME": "Country",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ServiceProviders",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "ServiceProviders",
+    "COLUMN_NAME": "ImagePath",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "VacationServiceEnable",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "AbsenceServiceEnable",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "PermissionStratDay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "AlertCalculatedFromExacttime",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "EarlyAttend",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "LateAttend",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "EarlyLeave",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "LateLeave",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "EmailsLanguage",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "CanUploadMasterImage",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "AllowedRequestTypes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "WorkingHoursFrom",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "WorkingHoursTo",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "BasicSalaryItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "VariableSalaryItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "AttendanceServiceEnable",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "MobileAppEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "ManagerPortalEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "OkrEnabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "MobileAppUserCount",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "SubscriptionFeeItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "ShowActivities",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Settings",
+    "COLUMN_NAME": "AlertCalculatedFromExacttimeDay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SettlementTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SettlementTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SettlementTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SettlementTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Sheet1$",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Sheet1$",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "Cycles",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "StartDay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "ShiftType",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "ShiftSettingId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "ShiftUnit",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Shifts",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "ShiftType",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "CheckForAbsence",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "WorkingHoursPerMonth",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "ActivityId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "RaiseVacationAlerts",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "FreeShiftTypePredicationMethod",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "ShiftSettings",
+    "COLUMN_NAME": "OverWriteEarlyLeave",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Skills",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Skills",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Skills",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Skills",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Skills",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SkinColors",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SkinColors",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SkinColors",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SkinColors",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "SocialInsuranceSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SocialInsuranceSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "SocialInsuranceSettings",
+    "COLUMN_NAME": "AutoSubscriptionFee",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "SocialInsuranceSettings",
+    "COLUMN_NAME": "ItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "Reason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "MobileAppDisabled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "CreatedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "CreatedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "EndedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Suspensions",
+    "COLUMN_NAME": "EndedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TaskEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TaskEmployees",
+    "COLUMN_NAME": "TaskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TaskEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TaskEmployees",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TaskEmployees",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TaskEmployees",
+    "COLUMN_NAME": "HourlyRate",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "Description",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "IsActive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "IsPublic",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "EndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "ProjectId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tasks",
+    "COLUMN_NAME": "WowDeskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TempEmployees",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TempEmployees",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TenantRequestTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TenantRequestTypes",
+    "COLUMN_NAME": "RequestType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "TenantRequestTypes",
+    "COLUMN_NAME": "CustomerId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TenantRequestTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "SellerName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "Name",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "Status",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "Modules",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "ExpirationDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Tenants",
+    "COLUMN_NAME": "UsersNumber",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "StartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "TaskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "ProjectId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeSheet",
+    "COLUMN_NAME": "WowDeskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "AttendBegin",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "AttendTime",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "AttendEnd",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "LeaveBegin",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "LeaveTime",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "LeaveEnd",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "ShiftDay",
+    "DATA_TYPE": "smallint"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "ShiftId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "Border",
+    "DATA_TYPE": "time"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "IsVacation",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "IsExtended",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "MinWorkingHours",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "TimeTableOrder",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "MaxWorkingHours",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TimeTables",
+    "COLUMN_NAME": "MaxOvertime",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "HandlerType",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "HandlingId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "UserId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "TransactionAlertId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "TransactionAlertHandlings",
+    "COLUMN_NAME": "Value",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "AlertType",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "TransactionId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "IsHandled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "Count",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "HandledDuration",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "Handlers",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "From",
+    "DATA_TYPE": "bigint"
+  },
+  {
+    "TABLE_NAME": "TransactionAlerts",
+    "COLUMN_NAME": "To",
+    "DATA_TYPE": "bigint"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "Time",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "MachineName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "Username",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "TransactionPools",
+    "COLUMN_NAME": "Reason",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "TransDateTime",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "PlanDetailId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "IsManual",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "TimeTableId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Username",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Tag",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "HasAlerts",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "IsTrusted",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Latitude",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Longitude",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "LocationId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "Source",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "CreatedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "ImageUrl",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "IsSaved",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Transactions",
+    "COLUMN_NAME": "MobileNotes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserEmployees",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserEmployees",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserEmployees",
+    "COLUMN_NAME": "Module",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "UserEmployees",
+    "COLUMN_NAME": "Exclusive",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "UserAction",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "EntityName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "Details",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserLogs",
+    "COLUMN_NAME": "RefId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "ActionType",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "ElementId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "ElementType",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "ElementValue",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "TimeStamp",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "UserScenarios",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "VacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "Balance",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "Times",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "Action",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "VacationBalanceLogs",
+    "COLUMN_NAME": "Reason",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "VacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "Balance",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "Times",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "LastDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "VacationBalances",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "FromDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "ToDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "Duration",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "VacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "ReviewerId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "ReplacementId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "IsCanceled",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "Alerts",
+    "DATA_TYPE": "ntext"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "Notified",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "DocumentId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "RequestId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "Tag",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "AnotherTypeBalance",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "TimeTables",
+    "DATA_TYPE": "varchar"
+  },
+  {
+    "TABLE_NAME": "Vacations",
+    "COLUMN_NAME": "ReplacementChecked",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "BalanceStart",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "BalanceAddedEvery",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "ExpiredBalanceHandling",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "TransferLimit",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "AfterReachLimit",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "DaysTransferLimitFinal",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "ExpiredItemId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "VacationOnAccount",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "DaysTransferLimit",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "BalanceTransferVacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "BalanceAddedFromVacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettings",
+    "COLUMN_NAME": "SavingVacationWay",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "Action",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "Balance",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "Date",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "VacationBalanceId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "BalanceBefore",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "BalanceTransferVacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "TotalBalanceBefore",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "VacationSettlements",
+    "COLUMN_NAME": "LastDate",
+    "DATA_TYPE": "date"
+  },
+  {
+    "TABLE_NAME": "VacationTypeEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypeEmployees",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypeEmployees",
+    "COLUMN_NAME": "VacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "Balance",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "Payed",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "DurationBeforeDeserve",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "Limit",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "RequiredAttachment",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "HideBalance",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "AddOfficialVacations",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "AddWeekendVacations",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "MaximumMonthsForFutureDedution",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "Day",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "HalfDay",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypes",
+    "COLUMN_NAME": "QuarterDay",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "VacationTypeUpdates",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypeUpdates",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypeUpdates",
+    "COLUMN_NAME": "OldVacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypeUpdates",
+    "COLUMN_NAME": "NewVacationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "VacationTypeUpdates",
+    "COLUMN_NAME": "ChangeOn",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "VacationTypeUpdates",
+    "COLUMN_NAME": "Years",
+    "DATA_TYPE": "tinyint"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ModifiedDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "Email",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "Active",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "PicPath",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "NationalId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ModifiedBy",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "BirthDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ArabicFirstName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ArabicSecondName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ArabicFamilyName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EnglishFirstName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EnglishSecondName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EnglishFamilyName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "BloodGroup",
+    "DATA_TYPE": "nchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "MaritalDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "Code",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "SubjectToInsurance",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "SocialId",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "MaritalStatusId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ReligionId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "GenderId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "CountryId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ExtendedData",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "Phone",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EmergencyNumber",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EmployeeBankId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "OtherReligion",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "Notes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "IsTrusted",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "HasEpAccount",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "HasImage",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "EssPassword",
+    "DATA_TYPE": "nchar"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "WowDeskId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "vanEmployees",
+    "COLUMN_NAME": "IsSuspended",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "ViolationDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "Note",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "PenaltyDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "DeductedAmount",
+    "DATA_TYPE": "float"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "Applied",
+    "DATA_TYPE": "bit"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "ViolationTypeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "EmployeeId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "PenaltyId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Violations",
+    "COLUMN_NAME": "AppliedById",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ViolationTypes",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ViolationTypes",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "ViolationTypes",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "ViolationTypes",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "LicenseNo",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "Type",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "Number",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "LicenseStartDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "Weapons",
+    "COLUMN_NAME": "LicenseEndDate",
+    "DATA_TYPE": "datetime"
+  },
+  {
+    "TABLE_NAME": "WearDetails",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "WearDetails",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "WearDetails",
+    "COLUMN_NAME": "Trousers",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WearDetails",
+    "COLUMN_NAME": "Jacket",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WearDetails",
+    "COLUMN_NAME": "Shirt",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WearDetails",
+    "COLUMN_NAME": "shoes",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WeightHarmonies",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "WeightHarmonies",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "WeightHarmonies",
+    "COLUMN_NAME": "ArabicName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WeightHarmonies",
+    "COLUMN_NAME": "EnglishName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WowDeskAccounts",
+    "COLUMN_NAME": "TenantId",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "WowDeskAccounts",
+    "COLUMN_NAME": "Id",
+    "DATA_TYPE": "int"
+  },
+  {
+    "TABLE_NAME": "WowDeskAccounts",
+    "COLUMN_NAME": "ClientName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WowDeskAccounts",
+    "COLUMN_NAME": "UserName",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WowDeskAccounts",
+    "COLUMN_NAME": "Password",
+    "DATA_TYPE": "nvarchar"
+  },
+  {
+    "TABLE_NAME": "WowDeskAccounts",
+    "COLUMN_NAME": "Token",
+    "DATA_TYPE": "nvarchar"
+  }
+]
