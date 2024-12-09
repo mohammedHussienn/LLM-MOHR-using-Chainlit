@@ -1,16 +1,19 @@
 import chainlit as cl
 from chainlit.input_widget import Select
-from database_backend import DatabaseBackend
+from database_backend import DatabaseBackend, State
 import logging
 import pandas as pd
 from io import StringIO
 
 # Setup logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 # Initialize database backend
-db = DatabaseBackend()
+db = DatabaseBackend(schema_file_path="databaseSchema.txt")
 
 @cl.on_chat_start
 async def start():
@@ -34,14 +37,14 @@ Please select your preferences below to get started!
         id="tenant",
         label="Select Tenant",
         values=tenants,
-        initial_value="mendel-ai"  # Set default tenant
+        initial_value="testmohr"  # Set default tenant
     )
     
     mode_select = Select(
         id="mode",
         label="Chat Mode",
         values=["Raw Mode", "Informative Mode", "Conversational Mode"],
-        initial_value="Raw Mode"  # Set default mode
+        initial_value="Informative Mode"  # Set default mode
     )
     
     # Send settings
@@ -71,61 +74,89 @@ async def setup_agent(settings):
 
 @cl.on_message
 async def main(message: cl.Message):
+    logger.info("=== New Message Received ===")
+    logger.info(f"Message content: {message.content}")
+    
     try:
-        # Get settings from session
-        mode = cl.user_session.get("mode", "i")  # default to informative mode
+        # Get settings
+        mode = cl.user_session.get("mode", "i")
         tenant = cl.user_session.get("tenant")
+        logger.info(f"Current settings - Mode: {mode}, Tenant: {tenant}")
         
         if not tenant:
-            await cl.Message("⚠️ Please select a tenant first.\n\nYou can do this by clicking on the settings gear in the left corner of the chat bar.").send()
+            logger.warning("No tenant selected")
+            await cl.Message("⚠️ Please select a tenant first.").send()
             return
         
-        # Show initial thinking message
+        logger.info("Initializing processing messages...")
         thinking_msg = cl.Message(content="🤔 Let me think about that...")
         await thinking_msg.send()
         
-        # Show processing message while querying database
         processing_msg = cl.Message(content="⚙️ Processing your request...")
         await processing_msg.send()
         
         try:
-            # Get response from backend
+            # Initialize state
+            logger.info("Getting tenant ID and initializing state...")
+            tenant_id = db.get_tenant_id(tenant)
+            logger.info(f"Tenant ID retrieved: {tenant_id}")
+            
+            state: State = {
+                'tenant_id': tenant_id,
+                'question': message.content,
+                'query': '',
+                'result': '',
+                'answer': ''
+            }
+            logger.info("State initialized")
+
+            # Get and validate query
+            logger.info("Generating query...")
+            query_result = db.get_query(state)
+            logger.info("Validating query...")
+            if not db.validate_query(query_result['query']):
+                logger.warning("Query validation failed")
+                await thinking_msg.remove()
+                await processing_msg.remove()
+                await cl.Message(content="⚠️ Invalid query generated. Please rephrase.").send()
+                return
+
+            # Update state and get response
+            logger.info("Getting response from database...")
             response = db.invoke_prompt(mode, message.content, tenant)
+            logger.info("Response received")
+
         except Exception as query_error:
-            # Remove processing messages
+            logger.error(f"Query error: {query_error}")
             await thinking_msg.remove()
             await processing_msg.remove()
             
-            # Check for iteration limit error
             if "iteration limit" in str(query_error).lower():
+                logger.warning("Iteration limit exceeded")
                 await cl.Message(
-                    content="⚠️ I apologize, but this query is too complex for me to process. Could you please try to:\n\n" +
-                    "1. Break it down into simpler questions\n" +
-                    "2. Be more specific about what you're looking for\n" +
-                    "3. Rephrase the question"
+                    content="⚠️ Query too complex. Please simplify."
                 ).send()
                 return
             else:
-                # Re-raise other errors to be caught by outer try-except
                 raise query_error
             
-        # Remove both messages before sending the actual response
+        logger.info("Removing processing messages...")
         await thinking_msg.remove()
         await processing_msg.remove()
         
         # Handle response based on mode
+        logger.info(f"Processing response for mode: {mode}")
         if mode == 'r':
-            # Raw mode - display as table
+            logger.info("Processing raw mode response...")
             df, summary = db.create_csv(mode, response)
             
             if df is not None:
-                # Create CSV string
+                logger.info(f"DataFrame created successfully. Shape: {df.shape}")
                 csv_string = df.to_csv(index=False)
                 
-                # Send the summary message
                 await cl.Message(content=summary).send()
+                logger.info("Summary sent")
                 
-                # Add downloadable CSV file
                 await cl.Message(
                     content="You can download the complete dataset here:",
                     elements=[
@@ -136,15 +167,27 @@ async def main(message: cl.Message):
                         )
                     ]
                 ).send()
+                logger.info("CSV file sent")
+
+                if state['query']:
+                    await cl.Message(content=f"Query used:\n```sql\n{state['query']}\n```").send()
+                    logger.info("Query display sent")
             else:
+                logger.warning("No DataFrame created, sending raw response")
                 await cl.Message(content=response).send()
         else:
-            # Informative or Conversational mode - display as text
+            logger.info("Sending text response")
             await cl.Message(content=response).send()
             
+            if state['query']:
+                await cl.Message(content=f"Query used:\n```sql\n{state['query']}\n```").send()
+                logger.info("Query display sent")
+            
     except Exception as e:
-        logger.error(f"Error: {str(e)}")
+        logger.error(f"Error in main handler: {str(e)}", exc_info=True)
         await cl.Message(f"❌ An error occurred: {str(e)}").send()
+
+    logger.info("=== Message Processing Complete ===\n")
 
 @cl.on_stop
 async def stop():

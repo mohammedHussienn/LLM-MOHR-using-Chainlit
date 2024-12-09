@@ -8,6 +8,18 @@ from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from typing import List, Any, TypedDict
 import os
 import pandas as pd
+from typing_extensions import Annotated
+import logging
+import json
+from datetime import datetime, date
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
 
 load_dotenv()
 
@@ -22,6 +34,65 @@ class SQLResponse(TypedDict):
     sql_query: str
     column_names: List[str]
 
+class QueryOutput(TypedDict):
+    """Generated SQL query."""
+
+    query: Annotated[str, ..., "Syntactically valid SQL query."]
+
+class State(TypedDict, total=False):
+    tenant_id: int
+    question: str
+    query: str
+    result: str
+    answer: str
+    failed_queries: List[str]
+
+class SchemaManager:
+    """Parses and manages the database schema."""
+    def __init__(self, schema_file_path):
+        self.schema_file_path = schema_file_path
+        self.schema = {}
+
+    def parse_schema(self):
+        """Parses the schema file into a structured format."""
+        with open(self.schema_file_path, 'r') as f:
+            schema_raw = f.readlines()
+
+        current_table = None
+        for line in schema_raw:
+            line = line.strip()
+            if not line:
+                continue
+
+            if ':' in line:  # New table detected
+                # Extract table name before the colon
+                current_table = line.split(':')[0].strip()
+                self.schema[current_table] = []
+                # Get the columns part after the colon
+                columns_part = line.split(':', 1)[1].strip()
+                if columns_part:
+                    # Split by comma and clean up each column definition
+                    columns = [col.strip() for col in columns_part.split(',')]
+                    for col in columns:
+                        if '(' in col:  # Column has type information
+                            col_name = col.split('(')[0].strip()
+                            self.schema[current_table].append(col_name)
+            elif current_table and line:  # Additional columns for current table
+                # Split by comma and clean up each column definition
+                columns = [col.strip() for col in line.split(',')]
+                for col in columns:
+                    if '(' in col:  # Column has type information
+                        col_name = col.split('(')[0].strip()
+                        self.schema[current_table].append(col_name)
+
+    def get_table_info(self):
+        """Returns the schema as a dictionary."""
+        return self.schema
+
+    def get_columns(self, table_name):
+        """Fetches columns for a specific table."""
+        return self.schema.get(table_name, [])
+
 class DatabaseBackend:
     """Handles database operations and LLM interactions for SQL queries.
 
@@ -29,7 +100,7 @@ class DatabaseBackend:
     for different response modes (raw, informative, conversational).
     """
 
-    def __init__(self):
+    def __init__(self, schema_file_path="schema.txt"):
         # Initialize temperature
         self.temperature = {
             'r': 0,
@@ -39,7 +110,7 @@ class DatabaseBackend:
 
         self.llm_for_agent = ChatOpenAI(
             model_name="gpt-4o", 
-            temperature=0
+            temperature=0,
         )
 
         # Initialize parsers
@@ -168,16 +239,62 @@ class DatabaseBackend:
         
         self.database = SQLDatabase.from_uri(connection_string)
         
-        self.SQLAgent = create_sql_agent(
-            llm=self.llm_for_agent, 
-            db=self.database, 
-            verbose=True,
-            agent_executor_kwargs={
-                "handle_parsing_errors": True,
-                "input_format_instructions": """Do not use markdown formatting in your queries.
-                    When using sql_db_query, provide the raw SQL without any backticks or ```sql tags."""
-            }
+        self.structured_llm = self.llm_for_agent.with_structured_output(QueryOutput)
+        
+        self.prompt = PromptTemplate(
+            template='''
+            Given an input question, create a syntactically correct {dialect} query to run to help find the answer. \
+            Unless the user specifies in his question a specific number of examples they wish to obtain, always limit your query to at most {top_k} results. \
+            You can order the results by a relevant column to return the most interesting examples in the database.
+
+            Never query for all the columns from a specific table, only ask for a the few relevant columns given the question.
+
+            Pay attention to use only the column names that you can see in the schema description. Be careful to not query for columns that do not exist. Also, pay attention to which column is in which table.
+            
+            IMPORTANT:
+            Always add "SET CONTEXT_INFO {tenant_id}" in the top of your query.
+            If you are asked to get ANY INFORMATION ABOUT A name or if youre looking for a name, look for the column called "EnglishName" EXCLUSIVELY IN THE EMPLOYEES TABLE.  
+            
+            The following queries were already tried and returned no results, please try a different approach:
+            {failed_queries}
+
+            Only use the following tables:
+            {table_info}
+
+            Question: {input}''',
+            input_variables=['input', 'table_info', 'dialect', 'top_k', 'tenant_id', 'failed_queries']
         )
+        
+        # Initialize SchemaManager
+        self.schema_manager = SchemaManager(schema_file_path)
+        self.schema_manager.parse_schema()
+        self.parsed_schema = self.schema_manager.get_table_info()
+
+        
+    def get_query(self, state: State):
+        """Generate an SQL query based on user input and schema."""
+        logger.info(f"Generating query for question: {state['question']}")
+        logger.info(f"Using tenant_id: {state['tenant_id']}")
+        
+        # Safely get failed queries with default empty list
+        failed_queries = state.get('failed_queries', [])
+        failed_queries_text = "\n".join(failed_queries) if failed_queries else "None"
+        
+        table_info = json.dumps(self.parsed_schema, indent=4)
+        prompt = self.prompt.format(
+            input=state['question'],
+            table_info=table_info,
+            dialect=self.database.dialect,
+            top_k=10,
+            tenant_id=state['tenant_id'],
+            failed_queries=failed_queries_text
+        )
+        logger.info("Generated prompt for query creation")
+        
+        result = self.structured_llm.invoke(prompt)
+        logger.info(f"Generated SQL query: {result['query']}")
+        return {"query": result["query"]}
+    
 
     def get_prompt(self, mode):
         """Retrieve the prompt template for the specified mode.
@@ -240,117 +357,201 @@ class DatabaseBackend:
 
 
     def invoke_prompt(self, mode, input_text, username):
-        """Process user input and generate appropriate responses using SQL and LLM.
-
-        Args:
-            mode (str): Response mode ('r', 'i', or 'c')
-            input_text (str): User's input question
-            username (str): Username for tenant context
-
-        Returns:
-            Union[Dict, str]: For mode 'r': dict with results and column names
-                            For other modes: formatted string response
-        """
+        """Process user input and generate appropriate responses using SQL and LLM."""
         llm = self.get_llm(mode)
         tenant_id = self.get_tenant_id(username)
+
+        # Initialize state with empty failed_queries list
+        state: State = {
+            'tenant_id': tenant_id,
+            'question': input_text,
+            'query': '',
+            'result': '',
+            'answer': '',
+            'failed_queries': []
+        }
+
+        max_retries = 5
+        for attempt in range(max_retries):
+            try:
+                # Get the query
+                query_result = self.get_query(state)
+                query = query_result['query']
+
+                # Validate the query
+                if not self.validate_query(query):
+                    state['failed_queries'].append(f"Attempt {attempt + 1}: {query} (Invalid query)")
+                    continue
+
+                # Update state with validated query
+                state['query'] = query
+
+                # Execute query and get results
+                try:
+                    sql_results = self.get_info_from_sql(query)
+                    state['result'] = sql_results
+
+                    # If results are empty or error
+                    if not sql_results or "don't know" in sql_results.lower():
+                        state['failed_queries'].append(f"Attempt {attempt + 1}: {query} (No results)")
+                        continue
+
+                    # If we got results, process them based on mode
+                    if mode == 'r':
+                        try:
+                            logger.debug(f"Raw SQL results: {sql_results[:200]}...")
+                            # Create a safe evaluation context with both datetime and date
+                            eval_context = {
+                                "datetime": datetime,
+                                "date": date
+                            }
+                            data = eval(sql_results, eval_context)
+                            logger.debug(f"Evaluated data: {str(data)[:200]}...")
+                            if not data:
+                                return self.handle_unknown_response(mode, input_text)
+                            
+                            # Extract column names from the query
+                            query_lower = query.lower()
+                            select_part = query_lower[query_lower.find('select') + 6:query_lower.find('from')].strip()
+                            columns = [col.strip().split()[-1] for col in select_part.split(',')]
+                            
+                            # Format the data for the response
+                            formatted_data = {
+                                "table_data": []
+                            }
+                            
+                            # Create arrays for each column
+                            for i, col in enumerate(columns):
+                                column_data = {
+                                    "column_name": col,
+                                    "column_value": [row[i] for row in data]
+                                }
+                                formatted_data["table_data"].append(column_data)
+                            
+                            return formatted_data
+
+                        except Exception as e:
+                            logger.error(f"Error parsing raw results: {e}")
+                            state['failed_queries'].append(f"Attempt {attempt + 1}: {query} (Parse error)")
+                            continue
+
+                    # For informative or conversational modes
+                    prompt = self.get_prompt(mode)
+                    chain = prompt | llm | self.parser[mode]
+                    
+                    # Process sql_results to handle datetime before sending to LLM
+                    if isinstance(sql_results, str):
+                        try:
+                            processed_data = eval(sql_results, {"datetime": datetime})
+                            if isinstance(processed_data, (list, tuple)):
+                                processed_data = [
+                                    tuple(
+                                        val.strftime('%Y-%m-%d') if isinstance(val, datetime) else val
+                                        for val in row
+                                    )
+                                    for row in processed_data
+                                ]
+                            sql_results = str(processed_data)
+                        except Exception as e:
+                            logger.warning(f"Failed to process datetime in results for LLM: {e}")
+                    
+                    format_input = {
+                        "input": input_text,
+                        "sql_result": sql_results
+                    }
+                    answer = chain.invoke(format_input)
+                    state['answer'] = answer
+                    return answer
+
+                except Exception as sql_error:
+                    logger.error(f"SQL execution error: {sql_error}")
+                    state['failed_queries'].append(f"Attempt {attempt + 1}: {query} (SQL error: {str(sql_error)})")
+                    continue
+
+            except Exception as e:
+                error_msg = str(e)
+                logger.error(f"Error in attempt {attempt + 1}: {error_msg}")
+                state['failed_queries'].append(f"Attempt {attempt + 1}: General error: {error_msg}")
+                continue
+
+        # If we've exhausted all retries, return a failure response
+        logger.warning(f"All {max_retries} attempts failed. Failed queries: {state['failed_queries']}")
+        return self.handle_unknown_response(mode, input_text)
+
+    #TODO: change if statements to create another chain using llm chain to validate the query
+    def validate_query(self, query: str) -> bool:
+        """Validate the SQL query for safety and correctness using schema."""
+        logger.info(f"Validating query: {query}")
+        query_lower = query.lower()
         
-        # Define JSON parser
-        parser = JsonOutputParser(pydantic_object=SQLResponse)
-
         try:
-            full_input = f"""You are a SQL query assistant. Think through this step-by-step:
+            # Check for required SET CONTEXT_INFO
+            if 'set context_info' not in query_lower:
+                logger.warning("Validation failed: Missing SET CONTEXT_INFO")
+                return False
 
-                REQUIRED STEPS:
-                1. Analyze the question
-                2. Determine the required tables and columns
-                3. Build the SQL query following these rules:
-                   - Start with: SET CONTEXT_INFO {tenant_id}
-                   - Return complete results (no LIMIT/TOP unless specified)
-                   - For employee names, always use EnglishName column
-                   - Include EnglishName when returning employee-related data
-                   - Make column names user-friendly (e.g., "Employee ID" instead of "Id")
-                4. YOU must see that the query returns the correct results before you return the JSON object.
+            # Check for dangerous keywords
+            dangerous_keywords = ['drop', 'delete', 'truncate', 'update', 'insert', 'create', 'alter']
+            if any(keyword in query_lower for keyword in dangerous_keywords):
+                logger.warning(f"Validation failed: Contains dangerous keyword")
+                return False
 
-                IMPORTANT PROCESS RULES:
-                1. You can explore tables and check schemas as needed
-                2. After each thought, ALWAYS follow with a specific action
-                3. When you have the final query, say "I have the final query" and proceed to step 4
-                4. End your response with the JSON result format below
+            # Validate SELECT query
+            if 'select' not in query_lower:
+                logger.warning("Validation failed: Not a SELECT query")
+                return False
 
-                FINAL RETURN FORMAT:
-                Final Answer:
-                {{
-                    "sql_query": "SET CONTEXT_INFO {tenant_id}; YOUR_FINAL_SQL_QUERY",
-                    "column_names": ["Your", "Column", "Names"]
-                }}
+            # Validate column names against schema
+            for table, columns in self.parsed_schema.items():
+                if table.lower() in query_lower:
+                    referenced_columns = [col.lower() for col in columns if col.lower() in query_lower]
+                    if not referenced_columns:
+                        logger.warning(f"Validation failed: No valid columns from {table} found in query")
+                        return False
 
-                IMPORTANT: Do NOT include ```sql or ```json tags in your response as they cause syntax errors.
-
-                Question: {input_text}
-                """
-
-            # Get the response from the agent
-            agent_response = self.SQLAgent.invoke(full_input)
-            
-            # Parse the JSON response from the output
-            output = agent_response.get('output', '')
-            
-            # Check if the output is "I don't know" and handle it
-            if "i don't know" in output.lower():
-                return self.handle_unknown_response(mode, input_text)
-            
-            response_dict = parser.parse(output)
-            
-            sql_query = response_dict['sql_query']
-            column_names = response_dict['column_names']
-            
-            # Execute the SQL query using get_info_from_sql
-            sql_results = self.get_info_from_sql(sql_query)
-            
-            # For 'r' mode, return both results and column names
-            if mode == 'r':
-                return {
-                    'results': sql_results,
-                    'column_names': column_names
-                }
-            
-            # For informative or conversational modes, if SQL results indicate "don't know"
-            if "don't know" in sql_results.lower():
-                prompt = self.get_prompt(mode)
-                chain = prompt | llm | self.parser[mode]
-                format_input = {
-                    "input": input_text,
-                    "sql_result": "I don't have specific data from the database for this query, but I'll help you with what I know."
-                }
-                llm_response = chain.invoke(format_input)
-                return llm_response
-            
-            # Normal processing for other cases
-            prompt = self.get_prompt(mode)
-            chain = prompt | llm | self.parser[mode]
-            format_input = {
-                "input": input_text,
-                "sql_result": sql_results
-            }
-            llm_response = chain.invoke(format_input)
-            return llm_response
+            logger.info("Query validation successful")
+            return True
 
         except Exception as e:
-            error_msg = str(e)
-            print(f"Error in invoke_prompt: {error_msg}")
-            return self.handle_unknown_response(mode, input_text)
-        
+            logger.error(f"Query validation error: {e}")
+            return False
+
     def get_info_from_sql(self, query):
-        """Execute a SQL query and return the results.
-
-        Args:
-            query (str): SQL query to execute
-
-        Returns:
-            str: Query results
-        """
-        result = self.database.run(query)
-        return result
+        """Execute a SQL query and return the results."""
+        logger.info("Executing SQL query...")
+        try:
+            result = self.database.run(query)
+            logger.info(f"Query executed successfully. Result length: {len(str(result))}")
+            
+            # Convert the result to handle datetime objects
+            if isinstance(result, str):
+                try:
+                    # Add both datetime and date to evaluation context
+                    eval_context = {
+                        "datetime": datetime,
+                        "date": date
+                    }
+                    processed_result = eval(result, eval_context)
+                    
+                    # Convert datetime objects in the results
+                    if isinstance(processed_result, (list, tuple)):
+                        processed_result = [
+                            tuple(
+                                val.strftime('%Y-%m-%d') if isinstance(val, (datetime, date)) else val
+                                for val in row
+                            )
+                            for row in processed_result
+                        ]
+                    
+                    return str(processed_result)
+                except Exception as e:
+                    logger.warning(f"Failed to process datetime in result: {e}")
+                    return result
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error executing SQL query: {e}")
+            raise
         
     def create_csv(self, mode, output):
         """Process query output and create a pandas DataFrame.
@@ -366,89 +567,41 @@ class DatabaseBackend:
         """
         try:
             if mode == 'r':
-                print("\n=== Debug Create CSV ===")
-                print(f"Input type: {type(output)}")
-                
-                if isinstance(output, dict):
-                    print("\nDictionary contents:")
-                    for key, value in output.items():
-                        print(f"\nKey: {key}")
-                        print(f"Value type: {type(value)}")
-                        print(f"Value: {value[:500] if isinstance(value, str) else value}")
+                if isinstance(output, dict) and "table_data" in output:
+                    # Create a dictionary for pandas DataFrame
+                    data_dict = {}
                     
-                    try:
-                        # Import datetime module (not just the datetime class)
-                        import datetime as dt
-                        
-                        # Create eval globals with common modules
-                        eval_globals = {
-                            'datetime': dt,  # Provide the whole datetime module
-                            'str': str,
-                            'int': int,
-                            'float': float,
-                            'bool': bool,
-                            'None': None
-                        }
-                        
-                        # Extract results and column names with context
-                        data_list = eval(output['results'], eval_globals)
-                        columns = output['column_names']
-                        
-                        print("\nAfter processing:")
-                        print(f"Data list type: {type(data_list)}")
-                        print(f"First row: {data_list[0] if data_list else 'No data'}")
-                        print(f"Columns: {columns}")
-                        
-                        if not data_list:
-                            return None, "No data found"
-                        
-                        # Initialize dictionary with empty lists for each column
-                        table_dict = {col: [] for col in columns}
-                        
-                        # Populate data
-                        for row in data_list:
-                            for col_name, value in zip(columns, row):
-                                # Handle different value types
-                                if isinstance(value, dt.datetime):  # Changed this to dt.datetime
-                                    value = value.strftime('%Y-%m-%d')
-                                table_dict[col_name].append(value)
-                        
-                        # Create DataFrame
-                        df = pd.DataFrame(table_dict)
-                        print(f"\nCreated DataFrame with shape: {df.shape}")
-                        
-                        # Clean up DataFrame
-                        df = df.replace('None', pd.NA)
-                        
-                        # If any column contains 'name', strip whitespace
-                        name_cols = [col for col in df.columns if isinstance(col, str) and 'name' in col.lower()]
-                        for col in name_cols:
-                            df[col] = df[col].str.strip()
-                        
-                        # Sort by first name column if it exists
-                        if name_cols:
-                            df = df.sort_values(name_cols[0])
-                        df = df.reset_index(drop=True)
-                        
-                        # Create summary message
-                        num_rows = len(df)
-                        summary = f"Found {num_rows} records in the data."
-                        print(f"\nSummary: {summary}")
-                        
-                        return df, summary
-                        
-                    except Exception as e:
-                        print(f"\nError processing dictionary: {e}")
-                        print(f"Error type: {type(e)}")
-                        return None, f"Error processing data: {str(e)}"
+                    # Extract data from the structured format
+                    for column in output["table_data"]:
+                        col_name = column["column_name"]
+                        col_values = column["column_value"]
+                        data_dict[col_name] = col_values
+                    
+                    # Create DataFrame
+                    df = pd.DataFrame(data_dict)
+                    
+                    # Clean up DataFrame
+                    df = df.replace('None', pd.NA)
+                    
+                    # Sort if there's a name column
+                    name_cols = [col for col in df.columns if 'name' in col.lower()]
+                    if name_cols:
+                        df = df.sort_values(name_cols[0])
+                    df = df.reset_index(drop=True)
+                    
+                    # Create summary
+                    num_rows = len(df)
+                    summary = f"Found {num_rows} records in the data."
+                    
+                    return df, summary
                 else:
-                    print("Input is not a dictionary")
-                    return None, "Invalid input type"
+                    logger.warning("Invalid output format for CSV creation")
+                    return None, "Invalid data format"
                     
-            return output, "Data processed successfully"
+            return None, "Mode not supported for CSV creation"
                 
         except Exception as e:
-            print(f"Error in create_csv: {e}")
+            logger.error(f"Error in create_csv: {e}")
             return None, f"Error processing data: {str(e)}"
         
     def handle_unknown_response(self, mode, input_text):
