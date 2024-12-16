@@ -1,0 +1,9 @@
+The tables description, their primary keys (PK), and foreign keys (FK) and their types as follows:
+
+Employees
+Requests
+Vacations
+EmployeeItems
+Plans
+JobTitles
+Transactions

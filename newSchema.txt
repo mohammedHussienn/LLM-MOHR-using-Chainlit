@@ -1,0 +1,130 @@
+EMPLOYEES Table (The table includes information related to employees):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identification of each employee.
+MODIFIEDDATE DATETIME : Date and time when the employee record was last modified.
+EMAIL NVARCHAR : Email address of the employee.
+ACTIVE BIT : Status indicating if the employee is active.
+USERNAME NVARCHAR : Username for the employee.
+PICPATH NVARCHAR : Path to the employee’s profile picture.
+NATIONALID NVARCHAR : National ID of the employee.
+MODIFIEDBY NVARCHAR : User who last modified the record.
+BIRTHDATE DATETIME : Date of birth of the employee.
+BLOODGROUP NCHAR : Blood group of the employee.
+MARITALDATE DATETIME : Date of marital status change.
+CODE NVARCHAR : Unique code for the employee.
+SUBJECTTOINSURANCE BIT : Indicates if the employee is subject to insurance.
+SOCIALID NVARCHAR : Social ID of the employee.
+MARITALSTATUSID INT : Identifier for marital status.
+RELIGIONID INT : Identifier for religion.
+GENDERID INT : Identifier for gender.
+COUNTRYID INT : Foreign Key, identifier for the country.
+EXTENDEDDATA NVARCHAR : Extended data for the employee.
+PHONE NVARCHAR : Contact number of the employee.
+EMERGENCYNUMBER NVARCHAR : Emergency contact number.
+EMPLOYEEBANKID INT : Identifier for the employee's bank.
+OTHERRELIGION NVARCHAR : Other religion details if applicable.
+NOTES NVARCHAR : Notes or remarks about the employee.
+ISTRUSTED BIT : Indicates if the employee is trusted.
+HASEPACCOUNT BIT : Status of having an EP account.
+HASIMAGE BIT : Indicates if the employee has an image uploaded.
+ARABICNAME NVARCHAR : Full Arabic name of the employee.
+ENGLISHNAME NVARCHAR : Full English name of the employee.
+ESSPASSWORD NCHAR : ESS password for the employee.
+WOWDESKID INT : Identifier for WowDesk integration.
+ISSUSPENDED BIT : Indicates if the employee is suspended.
+
+REQUESTS Table (The table includes information related to employee requests):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identifier for each request.
+DATE DATETIME : Date when the request was created.
+EMPLOYEEID INT : Foreign Key, ID of the employee making the request.
+REQUESTTYPE TINYINT : Type of the request.
+ISAPPROVED BIT : Indicates if the request is approved.
+ISCANCELED BIT : Indicates if the request is canceled.
+NOTES NVARCHAR : Notes related to the request.
+MODIFIEDDATE DATETIME : Date and time when the request was last modified.
+MODIFIEDBY NVARCHAR : User who last modified the request.
+GUID UNIQUEIDENTIFIER : Unique identifier for the request.
+REQUESTTYPEID INT : Identifier for the request type.
+VALUE FLOAT : Value associated with the request.
+ISDELIVERED BIT : Indicates if the request has been delivered.
+DELIVERYNOTES NVARCHAR : Notes regarding the delivery of the request.
+ATTACHMENTS NVARCHAR : Attachments related to the request.
+CREATEDDATE DATETIME : Date when the request was created.
+REFID INT : Reference ID for the request.
+MONTHLYTIMESHEET_ID INT : Identifier for the monthly timesheet.
+
+VACATIONS Table (The table includes employee vacation details):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identifier for the vacation entry.
+FROMDATE DATETIME : Start date of the vacation.
+TODATE DATETIME : End date of the vacation.
+DURATION FLOAT : Duration of the vacation in days.
+EMPLOYEEID INT : Foreign Key, ID of the employee taking the vacation.
+NOTE NVARCHAR : Notes about the vacation.
+VACATIONTYPEID INT : Identifier for the type of vacation.
+REVIEWERID INT : ID of the vacation reviewer.
+REPLACEMENTID INT : ID of the employee replacing the requester during the vacation.
+ISCANCELED BIT : Indicates if the vacation is canceled.
+MODIFIEDBY NVARCHAR : User who last modified the vacation entry.
+MODIFIEDDATE DATETIME : Date and time when the vacation was last modified.
+ALERTS NTEXT : Alerts or notifications related to the vacation.
+NOTIFIED BIT : Indicates if notifications have been sent.
+DOCUMENTID INT : Identifier for the document attached to the vacation.
+REQUESTID INT : Foreign Key, identifier for the associated request.
+TAG NVARCHAR : Tag or label for the vacation.
+ANOTHERTYPEBALANCE FLOAT : Balance for another type of leave.
+TIMETABLES VARCHAR : Timetables related to the vacation.
+REPLACEMENTCHECKED BIT : Indicates if the replacement has been checked.
+
+EMPLOYEEITEMS Table (The table includes information about items assigned to employees):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identifier for the employee item.
+ITEMID INT : Identifier for the item.
+EQUATIONID INT : Identifier for the equation used.
+VALUE FLOAT : Value of the item assigned.
+EMPLOYEEID INT : Foreign Key, ID of the employee receiving the item.
+EXPENSEACCOUNT INT : Expense account identifier.
+ACCRUALACCOUNT INT : Accrual account identifier.
+COSTCENTER INT : Identifier for the cost center.
+
+PLANS Table (The table includes planning information):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identifier for the plan.
+NAME NVARCHAR : Name or description of the plan.
+STARTDATE DATETIME : Start date of the plan.
+ENDDATE DATETIME : End date of the plan.
+SHIFTID INT : Identifier for the shift.
+MODIFIEDDATE DATETIME : Date and time when the plan was last modified.
+MODIFIEDBY NVARCHAR : User who last modified the plan.
+
+JOBTITLES Table (The table includes job title details):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identifier for the job title.
+ARABICNAME NVARCHAR : Job title in Arabic.
+ENGLISHNAME NVARCHAR : Job title in English.
+DESCRIPTION NVARCHAR : Description of the job title.
+CODE NVARCHAR : Unique code for the job title.
+
+TRANSACTIONS Table (The table includes information related to employee transactions):
+TENANTID INT : Identifier for the tenant.
+ID INT : Primary Key, unique identifier for the transaction.
+TRANSDATETIME DATETIME : Date and time of the transaction.
+TYPE NVARCHAR : Type/category of the transaction.
+EMPLOYEEID INT : Foreign Key, ID of the employee involved in the transaction.
+PLANDETAILID INT : Identifier for plan details.
+ISMANUAL BIT : Indicates if the transaction is manual.
+TIMETABLEID NVARCHAR : Identifier for the timetable.
+USERNAME NVARCHAR : Username associated with the transaction.
+TAG NVARCHAR : Tag or label for the transaction.
+NOTES NVARCHAR : Notes related to the transaction.
+HASALERTS BIT : Indicates if the transaction has alerts.
+ISTRUSTED BIT : Indicates if the transaction is trusted.
+LATITUDE FLOAT : Latitude location of the transaction.
+LONGITUDE FLOAT : Longitude location of the transaction.
+LOCATIONID INT : Identifier for the location.
+SOURCE TINYINT : Source of the transaction.
+CREATEDDATE DATETIME : Date when the transaction was created.
+IMAGEURL NVARCHAR : URL for the image related to the transaction.
+ISSAVED BIT : Indicates if the transaction is saved.
+MOBILENOTES NVARCHAR : Notes entered via mobile.
