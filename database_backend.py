@@ -5,22 +5,165 @@ from langchain_openai import ChatOpenAI
 from langchain_community.agent_toolkits import create_sql_agent
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
-from typing import List, Any, TypedDict
+from typing import List, Any, TypedDict, Optional
 import os
 import pandas as pd
+from typing_extensions import Annotated
+import logging
+import json
+from datetime import datetime, date
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
 
 load_dotenv()
 
+class State(TypedDict):
+    """State TypedDict with required fields."""
+    tenant_id: int
+    question: str
+    query: str
+    valid: bool
+    result: str
+    answer: str
+    failed_queries: List[str]
 
-class SQLResponse(TypedDict):
-    """TypedDict for structuring SQL query responses.
+class QueryChain:
+    """Chain responsible for generating SQL queries."""
+    def __init__(self, schema_file_path: str, database, llm=None):
+        # Read schema directly from file
+        with open(schema_file_path, 'r') as f:
+            self.schema = f.read()
+            
+        self.database = database
+        self.llm = llm or ChatOpenAI(model="gpt-4o", temperature=0)
+        self.output_parser = StrOutputParser()
+        
+        self.prompt = PromptTemplate(
+            template='''
+            Given an input question, create a syntactically correct {dialect} query to run to help find the answer. \
+            Unless the user specifies in his question a specific number of examples they wish to obtain, always limit your query to at most {top_k} results using "TOP" syntax. \
+            
+            Never query for all the columns from a specific table, only ask for the few relevant columns given the question.
 
-    Attributes:
-        sql_query (str): The SQL query string
-        column_names (List[str]): List of column names from the query result
-    """
-    sql_query: str
-    column_names: List[str]
+            Pay attention to use only the column names you can see in the schema description. \
+            Also, pay attention to which column is in which table.
+            
+            IMPORTANT RULES:
+            1. Always add "SET CONTEXT_INFO {tenant_id}" at the top of your query
+            2. Do not use Top N in your query unless the user specifically asks for a specific number of results.
+            3. If you're asked to get ANY INFORMATION ABOUT A name or if you're looking for a name, look for the column called "EnglishName" EXCLUSIVELY IN THE EMPLOYEES TABLE
+            
+            The following queries were already tried and returned no results, please try a different approach:
+            {failed_queries}
+
+            Schema Description:
+            {schema}
+
+            Question: {input}
+            
+            Return ONLY the SQL query with no additional text or explanation.
+            ''',
+            input_variables=['input', 'schema', 'dialect', 'top_k', 'tenant_id', 'failed_queries']
+        )
+
+    def generate_query(self, question: str, tenant_id: int, failed_queries: List[str] = []) -> str:
+        """Generate SQL query from user question."""
+        failed_queries_text = "\n".join(failed_queries) if failed_queries else "None"
+        
+        # Add caching to reduce API calls
+        cache_key = f"{question}_{tenant_id}_{failed_queries_text}"
+        if hasattr(self, '_query_cache') and cache_key in self._query_cache:
+            logger.info(f"Using cached query: {self._query_cache[cache_key]}")
+            return self._query_cache[cache_key]
+        
+        chain = self.prompt | self.llm | self.output_parser
+        query = chain.invoke({
+            "input": question,
+            "schema": self.schema,
+            "dialect": self.database.dialect,
+            "top_k": 10,
+            "tenant_id": tenant_id,
+            "failed_queries": failed_queries_text
+        })
+        
+        query = query.strip()
+        logger.info(f"Generated SQL query: {query}")
+        
+        if not hasattr(self, '_query_cache'):
+            self._query_cache = {}
+        self._query_cache[cache_key] = query
+        return query
+
+class QueryValidator:
+    """Chain responsible for validating SQL queries."""
+    def __init__(self, schema_file_path: str, database, llm=None):
+        # Read schema directly from file
+        with open(schema_file_path, 'r') as f:
+            self.schema = f.read()
+            
+        self.database = database
+        self.llm = llm or ChatOpenAI(model="gpt-4o", temperature=0)
+        
+        self.prompt = PromptTemplate(
+            template='''
+            Validate the following SQL query against these requirements:
+            
+            1. Must contain "SET CONTEXT_INFO"
+            2. Must be a SELECT query only
+            3. Must not contain dangerous keywords (DROP, DELETE, TRUNCATE, UPDATE, INSERT, CREATE, ALTER)
+            4. Must reference valid columns from the schema
+            
+            Schema:
+            {schema}
+            
+            Query to validate:
+            {query}
+            
+            Return ONLY "VALID" if the query is valid, or explain why it's invalid starting with "INVALID:".
+            ''',
+            input_variables=['schema', 'query']
+        )
+        
+    def validate(self, query: str) -> tuple[bool, str]:
+        """Validate query and return boolean result and reason."""
+        chain = self.prompt | self.llm | StrOutputParser()
+        
+        validation_result = chain.invoke({
+            "schema": self.schema,
+            "query": query
+        }).strip()
+        
+        is_valid = "VALID" in validation_result.upper()
+        reason = "" if is_valid else validation_result
+        
+        return is_valid, reason
+
+    def execute_if_valid(self, query: str) -> Optional[str]:
+        """Validate and execute query if valid."""
+        is_valid, reason = self.validate(query)
+        if is_valid:
+            try:
+                clean_query = query.replace('```sql', '').replace('```', '').strip()
+                logger.info(f"Executing SQL query: {clean_query}")
+                result = self.database.run(clean_query)
+                logger.info(f"Query result: {result}")
+                return str(result)
+            except Exception as e:
+                logger.error(f"Query execution error: {e}")
+                return None
+        else:
+            logger.warning(f"Query validation failed: {reason}")
+            return None
+
+def create_query_output(query: str) -> dict:
+    """Create a query output dictionary."""
+    return {"query": query}
 
 class DatabaseBackend:
     """Handles database operations and LLM interactions for SQL queries.
@@ -29,7 +172,7 @@ class DatabaseBackend:
     for different response modes (raw, informative, conversational).
     """
 
-    def __init__(self):
+    def __init__(self, schema_file_path="newSchema.txt"):
         # Initialize temperature
         self.temperature = {
             'r': 0,
@@ -37,9 +180,12 @@ class DatabaseBackend:
             'c': 0.9
         }
 
-        self.llm_for_agent = ChatOpenAI(
-            model_name="gpt-4o", 
-            temperature=0
+        # Initialize OpenAI client with rate limiting
+        self.llm = ChatOpenAI(
+            model="gpt-4o",
+            temperature=0,
+            max_retries=3,
+            max_tokens=1000
         )
 
         # Initialize parsers
@@ -48,6 +194,26 @@ class DatabaseBackend:
             'i': StrOutputParser(),
             'c': StrOutputParser()
         }
+        
+        # Initialize database connection
+        username = os.getenv("AZURE_SQL_USERNAME")
+        password = os.getenv("AZURE_SQL_PASSWORD")
+        server_name = os.getenv("AZURE_SQL_SERVER")
+        database_name = os.getenv("AZURE_SQL_DATABASE")
+
+        connection_string = (
+            f"mssql+pyodbc://{username}:{password}@{server_name}"
+            f"/{database_name}"
+            "?driver=ODBC+Driver+18+for+SQL+Server"
+            "&TrustServerCertificate=yes"
+            "&timeout=30"
+        )
+        
+        self.database = SQLDatabase.from_uri(connection_string)
+        
+        # Initialize chains with schema file path
+        self.query_chain = QueryChain(schema_file_path, self.database, llm=self.llm)
+        self.validator = QueryValidator(schema_file_path, self.database, llm=self.llm)
         
         # Initialize prompts
         self.prompts = {
@@ -64,6 +230,7 @@ class DatabaseBackend:
                 4. Keep numbers as numbers (not strings)
                 5. Do not include any % symbols in the values
                 6. Each employee should have one entry with all their information
+                7. Use null for missing values (not None, undefined, or empty string)
                 
                 Example of CORRECT FORMAT this is just an example of what is needed. DO NOT FORGET THIS:
                 {{
@@ -152,33 +319,6 @@ class DatabaseBackend:
             )
         }
 
-        # Initialize database connection
-        username = os.getenv("AZURE_SQL_USERNAME")
-        password = os.getenv("AZURE_SQL_PASSWORD")
-        server_name = os.getenv("AZURE_SQL_SERVER")
-        database_name = os.getenv("AZURE_SQL_DATABASE")
-
-        connection_string = (
-            f"mssql+pyodbc://{username}:{password}@{server_name}"
-            f"/{database_name}"
-            "?driver=ODBC+Driver+18+for+SQL+Server"
-            "&TrustServerCertificate=yes"
-            "&timeout=30"
-        )
-        
-        self.database = SQLDatabase.from_uri(connection_string)
-        
-        self.SQLAgent = create_sql_agent(
-            llm=self.llm_for_agent, 
-            db=self.database, 
-            verbose=True,
-            agent_executor_kwargs={
-                "handle_parsing_errors": True,
-                "input_format_instructions": """Do not use markdown formatting in your queries.
-                    When using sql_db_query, provide the raw SQL without any backticks or ```sql tags."""
-            }
-        )
-
     def get_prompt(self, mode):
         """Retrieve the prompt template for the specified mode.
 
@@ -196,19 +336,15 @@ class DatabaseBackend:
         return self.prompts[mode]
 
     def get_tenant_id(self, username):
-        """Retrieve the tenant ID for a given username.
-
-        Args:
-            username (str): The username to look up
-
-        Returns:
-            str: The tenant ID associated with the username
-        """
+        """Retrieve the tenant ID for a given username."""
         tenant_query = f"""
         SELECT TenantID FROM Tenants WHERE Name = '{username}'
         """
         result = self.database.run(tenant_query)
-        return ''.join(filter(str.isdigit, result))
+        # Convert result to string and extract only digits
+        result_str = str(result)
+        digits = ''.join(char for char in result_str if char.isdigit())
+        return int(digits) if digits else None
 
     def get_llm(self, mode):
         """Initialize a ChatOpenAI instance with mode-specific temperature.
@@ -220,7 +356,7 @@ class DatabaseBackend:
             ChatOpenAI: Configured language model instance
         """
         return ChatOpenAI(
-            model_name="gpt-4o-mini", 
+            model="gpt-4o-mini", 
             temperature=self.temperature[mode]
         )
 
@@ -235,232 +371,91 @@ class DatabaseBackend:
         """
         result = self.database.run(tenant_query)
         # Clean up the result by removing tuples and extra characters
-        tenant_list = [name[0] for name in eval(result)]
+        tenant_list = [name[0] for name in eval(str(result))]
         return tenant_list
 
+    def get_query(self, state: State) -> str:
+        """Generate SQL query based on user input and schema."""
+        return self.query_chain.generate_query(
+            question=state['question'],
+            tenant_id=int(state['tenant_id']),
+            failed_queries=state.get('failed_queries', [])
+        )
 
-    def invoke_prompt(self, mode, input_text, username):
-        """Process user input and generate appropriate responses using SQL and LLM.
+    def validate_query(self, query: str) -> tuple[bool, str]:
+        """Validate the SQL query."""
+        return self.validator.validate(query)
 
-        Args:
-            mode (str): Response mode ('r', 'i', or 'c')
-            input_text (str): User's input question
-            username (str): Username for tenant context
-
-        Returns:
-            Union[Dict, str]: For mode 'r': dict with results and column names
-                            For other modes: formatted string response
-        """
-        llm = self.get_llm(mode)
-        tenant_id = self.get_tenant_id(username)
-        
-        # Define JSON parser
-        parser = JsonOutputParser(pydantic_object=SQLResponse)
-
-        try:
-            full_input = f"""You are a SQL query assistant. Think through this step-by-step:
-
-                REQUIRED STEPS:
-                1. Analyze the question
-                2. Determine the required tables and columns
-                3. Build the SQL query following these rules:
-                   - Start with: SET CONTEXT_INFO {tenant_id}
-                   - Return complete results (no LIMIT/TOP unless specified)
-                   - For employee names, always use EnglishName column
-                   - Include EnglishName when returning employee-related data
-                   - Make column names user-friendly (e.g., "Employee ID" instead of "Id")
-                4. YOU must see that the query returns the correct results before you return the JSON object.
-
-                IMPORTANT PROCESS RULES:
-                1. You can explore tables and check schemas as needed
-                2. After each thought, ALWAYS follow with a specific action
-                3. When you have the final query, say "I have the final query" and proceed to step 4
-                4. End your response with the JSON result format below
-
-                FINAL RETURN FORMAT:
-                Final Answer:
-                {{
-                    "sql_query": "SET CONTEXT_INFO {tenant_id}; YOUR_FINAL_SQL_QUERY",
-                    "column_names": ["Your", "Column", "Names"]
-                }}
-
-                IMPORTANT: Do NOT include ```sql or ```json tags in your response as they cause syntax errors.
-
-                Question: {input_text}
-                """
-
-            # Get the response from the agent
-            agent_response = self.SQLAgent.invoke(full_input)
+    def create_csv(self, mode: str, output: Any) -> tuple[Optional[pd.DataFrame], str]:
+        """Process query output and create a pandas DataFrame."""
+        if mode == 'r':
+            logger.info(f"Raw output received: {output}")
             
-            # Parse the JSON response from the output
-            output = agent_response.get('output', '')
-            
-            # Check if the output is "I don't know" and handle it
-            if "i don't know" in output.lower():
-                return self.handle_unknown_response(mode, input_text)
-            
-            response_dict = parser.parse(output)
-            
-            sql_query = response_dict['sql_query']
-            column_names = response_dict['column_names']
-            
-            # Execute the SQL query using get_info_from_sql
-            sql_results = self.get_info_from_sql(sql_query)
-            
-            # For 'r' mode, return both results and column names
-            if mode == 'r':
-                return {
-                    'results': sql_results,
-                    'column_names': column_names
-                }
-            
-            # For informative or conversational modes, if SQL results indicate "don't know"
-            if "don't know" in sql_results.lower():
-                prompt = self.get_prompt(mode)
-                chain = prompt | llm | self.parser[mode]
-                format_input = {
-                    "input": input_text,
-                    "sql_result": "I don't have specific data from the database for this query, but I'll help you with what I know."
-                }
-                llm_response = chain.invoke(format_input)
-                return llm_response
-            
-            # Normal processing for other cases
-            prompt = self.get_prompt(mode)
-            chain = prompt | llm | self.parser[mode]
-            format_input = {
-                "input": input_text,
-                "sql_result": sql_results
-            }
-            llm_response = chain.invoke(format_input)
-            return llm_response
-
-        except Exception as e:
-            error_msg = str(e)
-            print(f"Error in invoke_prompt: {error_msg}")
-            return self.handle_unknown_response(mode, input_text)
-        
-    def get_info_from_sql(self, query):
-        """Execute a SQL query and return the results.
-
-        Args:
-            query (str): SQL query to execute
-
-        Returns:
-            str: Query results
-        """
-        result = self.database.run(query)
-        return result
-        
-    def create_csv(self, mode, output):
-        """Process query output and create a pandas DataFrame.
-
-        Args:
-            mode (str): Response mode ('r', 'i', or 'c')
-            output (Union[Dict, str]): Query output to process
-
-        Returns:
-            Tuple[Optional[pd.DataFrame], str]: Tuple containing:
-                - DataFrame of processed data (or None if error)
-                - Status message or error description
-        """
-        try:
-            if mode == 'r':
-                print("\n=== Debug Create CSV ===")
-                print(f"Input type: {type(output)}")
+            try:
+                # Handle string input
+                if isinstance(output, str):
+                    output = json.loads(output)
                 
-                if isinstance(output, dict):
-                    print("\nDictionary contents:")
-                    for key, value in output.items():
-                        print(f"\nKey: {key}")
-                        print(f"Value type: {type(value)}")
-                        print(f"Value: {value[:500] if isinstance(value, str) else value}")
+                if isinstance(output, dict) and "table_data" in output:
+                    # Create a dictionary for pandas DataFrame
+                    data_dict = {}
                     
-                    try:
-                        # Import datetime module (not just the datetime class)
-                        import datetime as dt
-                        
-                        # Create eval globals with common modules
-                        eval_globals = {
-                            'datetime': dt,  # Provide the whole datetime module
-                            'str': str,
-                            'int': int,
-                            'float': float,
-                            'bool': bool,
-                            'None': None
-                        }
-                        
-                        # Extract results and column names with context
-                        data_list = eval(output['results'], eval_globals)
-                        columns = output['column_names']
-                        
-                        print("\nAfter processing:")
-                        print(f"Data list type: {type(data_list)}")
-                        print(f"First row: {data_list[0] if data_list else 'No data'}")
-                        print(f"Columns: {columns}")
-                        
-                        if not data_list:
-                            return None, "No data found"
-                        
-                        # Initialize dictionary with empty lists for each column
-                        table_dict = {col: [] for col in columns}
-                        
-                        # Populate data
-                        for row in data_list:
-                            for col_name, value in zip(columns, row):
-                                # Handle different value types
-                                if isinstance(value, dt.datetime):  # Changed this to dt.datetime
-                                    value = value.strftime('%Y-%m-%d')
-                                table_dict[col_name].append(value)
-                        
-                        # Create DataFrame
-                        df = pd.DataFrame(table_dict)
-                        print(f"\nCreated DataFrame with shape: {df.shape}")
-                        
-                        # Clean up DataFrame
-                        df = df.replace('None', pd.NA)
-                        
-                        # If any column contains 'name', strip whitespace
-                        name_cols = [col for col in df.columns if isinstance(col, str) and 'name' in col.lower()]
-                        for col in name_cols:
-                            df[col] = df[col].str.strip()
-                        
-                        # Sort by first name column if it exists
-                        if name_cols:
-                            df = df.sort_values(name_cols[0])
-                        df = df.reset_index(drop=True)
-                        
-                        # Create summary message
-                        num_rows = len(df)
-                        summary = f"Found {num_rows} records in the data."
-                        print(f"\nSummary: {summary}")
-                        
-                        return df, summary
-                        
-                    except Exception as e:
-                        print(f"\nError processing dictionary: {e}")
-                        print(f"Error type: {type(e)}")
-                        return None, f"Error processing data: {str(e)}"
+                    # Extract data from the structured format
+                    for column in output["table_data"]:
+                        col_name = column["column_name"]
+                        # Convert None values to pandas NA
+                        col_values = [pd.NA if v is None else v for v in column["column_value"]]
+                        data_dict[col_name] = col_values
+                    
+                    # Create DataFrame
+                    df = pd.DataFrame(data_dict)
+                    logger.info(f"Created DataFrame with shape: {df.shape}")
+                    
+                    # Sort if there's a name column
+                    name_cols = [col for col in df.columns if 'name' in col.lower()]
+                    if name_cols:
+                        df = df.sort_values(name_cols[0])
+                    df = df.reset_index(drop=True)
+                    
+                    # Create summary
+                    num_rows = len(df)
+                    summary = f"Found {num_rows} records in the data."
+                    
+                    return df, summary
                 else:
-                    print("Input is not a dictionary")
-                    return None, "Invalid input type"
-                    
-            return output, "Data processed successfully"
+                    logger.warning("Missing 'table_data' in output")
+                    return None, "Invalid data format: missing table_data"
                 
-        except Exception as e:
-            print(f"Error in create_csv: {e}")
-            return None, f"Error processing data: {str(e)}"
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON parsing error: {e}")
+                return None, f"Invalid JSON format: {str(e)}"
+            except Exception as e:
+                logger.error(f"Error creating DataFrame: {str(e)}")
+                return None, f"Error processing data: {str(e)}"
+                
+        return None, "Mode not supported for CSV creation"
+
+    def invoke_prompt(self, mode: str, input_text: str, username: str) -> str:
+        """Process user input and return formatted response."""
+        tenant_id = self.get_tenant_id(username)
+        if tenant_id is None:
+            return "Could not find tenant ID. Please check the tenant name."
         
-    def handle_unknown_response(self, mode, input_text):
-        """Handle cases where the SQL agent doesn't know the answer."""
+        result = self.validator.execute_if_valid(self.query_chain.generate_query(
+            input_text, tenant_id, []
+        ))
+        
+        if not result:
+            return "I couldn't find any relevant information. Please try rephrasing your question."
+        
         llm = self.get_llm(mode)
         prompt = self.get_prompt(mode)
         chain = prompt | llm | self.parser[mode]
-        format_input = {
+        
+        return chain.invoke({
             "input": input_text,
-            "sql_result": "I don't have specific data from the database for this query, but I'll try to help you with what I know."
-        }
-        return chain.invoke(format_input)
+            "sql_result": result
+        })
 
 if __name__ == "__main__":
     db = DatabaseBackend()

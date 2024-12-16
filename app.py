@@ -1,20 +1,67 @@
 import chainlit as cl
 from chainlit.input_widget import Select
-from database_backend import DatabaseBackend
+from database_backend import DatabaseBackend, State
 import logging
 import pandas as pd
-from io import StringIO
+from typing import Optional
 
 # Setup logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
+try:
+    from tabulate import tabulate
+    TABULATE_INSTALLED = True
+except ImportError:
+    TABULATE_INSTALLED = False
+    logger.warning("tabulate not installed. Tables will be displayed in simple format.")
+
 # Initialize database backend
-db = DatabaseBackend()
+db = DatabaseBackend(schema_file_path="databaseSchema.txt")
+
+async def format_table_preview(df: pd.DataFrame) -> str:
+    """Format DataFrame for display in chat."""
+    preview_df = df.head(10)
+    if TABULATE_INSTALLED:
+        return preview_df.to_markdown(index=False)
+    return "\n".join([
+        "| " + " | ".join(str(x) for x in row) + " |"
+        for row in [preview_df.columns.tolist()] + preview_df.values.tolist()
+    ])
+
+async def send_data_response(df: pd.DataFrame, summary: str, query: Optional[str] = None):
+    """Send formatted data response to chat."""
+    if len(df) > 0:
+        table_str = await format_table_preview(df)
+        await cl.Message(
+            content=f"{summary}\n\nPreview of first 10 records:\n```\n{table_str}\n```"
+        ).send()
+
+    # Send downloadable CSV
+    file_data = df.to_csv(index=False).encode()
+    await cl.Message(
+        content="📥 Download complete dataset:",
+        elements=[
+            cl.File(
+                name="data.csv",
+                content=file_data,
+                mime="text/csv"
+            )
+        ]
+    ).send()
+
+    # Show query if available
+    if query:
+        await cl.Message(
+            content=f"🔍 Query used:\n```sql\n{query}\n```"
+        ).send()
 
 @cl.on_chat_start
 async def start():
-    # Send welcome message with markdown formatting
+    """Initialize chat session."""
     await cl.Message(
         content="""👋 Welcome to MOHR AI Assistant!
 
@@ -26,125 +73,112 @@ I'm here to help you with your queries. Here's what you can do:
 Please select your preferences below to get started!
 """).send()
     
-    # Get and sort tenants
+    # Setup chat settings
     tenants = sorted(db.get_all_tenants())
+    settings = await cl.ChatSettings([
+        Select(
+            id="mode",
+            label="Chat Mode",
+            values=["Raw Mode", "Informative Mode", "Conversational Mode"],
+            initial_value="Informative Mode"
+        ),
+        Select(
+            id="tenant",
+            label="Select Tenant",
+            values=tenants,
+            initial_value="testmohr"
+        )
+    ]).send()
     
-    # Create selectors with new defaults
-    tenant_select = Select(
-        id="tenant",
-        label="Select Tenant",
-        values=tenants,
-        initial_value="mendel-ai"  # Set default tenant
-    )
-    
-    mode_select = Select(
-        id="mode",
-        label="Chat Mode",
-        values=["Raw Mode", "Informative Mode", "Conversational Mode"],
-        initial_value="Raw Mode"  # Set default mode
-    )
-    
-    # Send settings
-    settings = await cl.ChatSettings([mode_select, tenant_select]).send()
-    
-    # Set default settings in session
-    cl.user_session.set("mode", "r")  # default to raw mode
-    cl.user_session.set("tenant", "mendel-ai")  # default tenant
+    # Set default session values
+    cl.user_session.set("mode", "i")
+    cl.user_session.set("tenant", "testmohr")
 
 @cl.on_settings_update
 async def setup_agent(settings):
-    # Map friendly names to mode codes
+    """Handle settings updates."""
     mode_map = {
         "Raw Mode": "r",
         "Informative Mode": "i",
         "Conversational Mode": "c"
     }
     
-    # Store settings in session
     cl.user_session.set("mode", mode_map[settings["mode"]])
     cl.user_session.set("tenant", settings["tenant"])
     
-    # Send confirmation message
     await cl.Message(
         content=f"✅ Settings updated:\n- Mode: {settings['mode']}\n- Tenant: {settings['tenant']}"
     ).send()
 
 @cl.on_message
 async def main(message: cl.Message):
+    """Handle user messages."""
+    logger.info(f"New message received: {message.content}")
+    
+    # Get current settings
+    mode = cl.user_session.get("mode", "i")  # Default to informative mode
+    tenant = cl.user_session.get("tenant")
+    
+    if not mode or not isinstance(mode, str):
+        mode = "i"  # Default to informative mode if invalid
+    
+    if not tenant:
+        await cl.Message("⚠️ Please select a tenant first.").send()
+        return
+    
+    # Show processing status
+    loading_msg = cl.Message(content="⏳ Processing...")
+    await loading_msg.send()
+    
     try:
-        # Get settings from session
-        mode = cl.user_session.get("mode", "i")  # default to informative mode
-        tenant = cl.user_session.get("tenant")
+        # Initialize state
+        tenant_id = db.get_tenant_id(tenant)
+        if not tenant_id:
+            raise ValueError(f"Invalid tenant: {tenant}")
         
-        if not tenant:
-            await cl.Message("⚠️ Please select a tenant first.\n\nYou can do this by clicking on the settings gear in the left corner of the chat bar.").send()
+        state: State = {
+            'tenant_id': tenant_id,
+            'question': message.content,
+            'valid': False,
+            'query': '',
+            'result': '',
+            'answer': '',
+            'failed_queries': []
+        }
+        
+        # Generate and validate query
+        query = db.query_chain.generate_query(
+            question=state['question'],
+            tenant_id=tenant_id,
+            failed_queries=[]
+        )
+        
+        is_valid, reason = db.validator.validate(query)
+        if not is_valid:
+            await cl.Message(f"⚠️ Invalid query: {reason}").send()
             return
         
-        # Show initial thinking message
-        thinking_msg = cl.Message(content="🤔 Let me think about that...")
-        await thinking_msg.send()
+        # Get response
+        response = db.invoke_prompt(mode, message.content, tenant)
         
-        # Show processing message while querying database
-        processing_msg = cl.Message(content="⚙️ Processing your request...")
-        await processing_msg.send()
-        
-        try:
-            # Get response from backend
-            response = db.invoke_prompt(mode, message.content, tenant)
-        except Exception as query_error:
-            # Remove processing messages
-            await thinking_msg.remove()
-            await processing_msg.remove()
-            
-            # Check for iteration limit error
-            if "iteration limit" in str(query_error).lower():
-                await cl.Message(
-                    content="⚠️ I apologize, but this query is too complex for me to process. Could you please try to:\n\n" +
-                    "1. Break it down into simpler questions\n" +
-                    "2. Be more specific about what you're looking for\n" +
-                    "3. Rephrase the question"
-                ).send()
-                return
-            else:
-                # Re-raise other errors to be caught by outer try-except
-                raise query_error
-            
-        # Remove both messages before sending the actual response
-        await thinking_msg.remove()
-        await processing_msg.remove()
-        
-        # Handle response based on mode
+        # Process response based on mode
         if mode == 'r':
-            # Raw mode - display as table
             df, summary = db.create_csv(mode, response)
-            
             if df is not None:
-                # Create CSV string
-                csv_string = df.to_csv(index=False)
-                
-                # Send the summary message
-                await cl.Message(content=summary).send()
-                
-                # Add downloadable CSV file
-                await cl.Message(
-                    content="You can download the complete dataset here:",
-                    elements=[
-                        cl.File(
-                            name="data.csv",
-                            content=csv_string.encode(),
-                            mime="text/csv"
-                        )
-                    ]
-                ).send()
+                await send_data_response(df, summary, query)
             else:
-                await cl.Message(content=response).send()
+                await cl.Message(content=str(response)).send()
         else:
-            # Informative or Conversational mode - display as text
             await cl.Message(content=response).send()
+            await cl.Message(
+                content=f"🔍 Query used:\n```sql\n{query}\n```"
+            ).send()
             
     except Exception as e:
-        logger.error(f"Error: {str(e)}")
-        await cl.Message(f"❌ An error occurred: {str(e)}").send()
+        logger.error(f"Error processing message: {str(e)}", exc_info=True)
+        await cl.Message(f"❌ Error: {str(e)}").send()
+    finally:
+        await loading_msg.remove()
 
 @cl.on_stop
 async def stop():
