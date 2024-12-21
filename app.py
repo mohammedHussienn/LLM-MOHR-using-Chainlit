@@ -26,22 +26,6 @@ except ImportError:
 # Initialize database backend
 db = DatabaseBackend(schema_file_path="newSchema.txt")
 
-async def format_table_preview(df: pd.DataFrame) -> str:
-    """Format DataFrame for display in chat."""
-    preview_df = df.head(10)
-    preview_df.columns = [col.title() for col in preview_df.columns]
-    
-    if TABULATE_INSTALLED:
-        return tabulate(preview_df.to_dict('records'), 
-                       headers='keys', 
-                       tablefmt='pipe', 
-                       showindex=False)
-    
-    return "\n".join([
-        "| " + " | ".join(str(x) for x in row) + " |"
-        for row in [preview_df.columns.tolist()] + preview_df.values.tolist()
-    ])
-
 async def send_data_response(df: pd.DataFrame, summary: str, query: Optional[str] = None):
     """Send formatted data response to chat."""
     if len(df) > 0:
@@ -49,20 +33,23 @@ async def send_data_response(df: pd.DataFrame, summary: str, query: Optional[str
             # Send the summary and query first
             message = f"{summary}\n\n"
             if query:
-                message += f"🔍 Query used:\n```sql\n{query}\n```"
+                message += f"��� Query used:\n```sql\n{query}\n```"
             
             await cl.Message(content=message).send()
 
-            # Send downloadable CSV
-            file_name = f"data_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-            file_data = df.to_csv(index=False).encode()
+            # Create Excel file in memory
+            excel_buffer = io.BytesIO()
+            df.to_excel(excel_buffer, index=False, engine='openpyxl')
+            excel_buffer.seek(0)
+            
+            file_name = f"data_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
             await cl.Message(
                 content=f"📥 Download complete dataset ({len(df)} records):",
                 elements=[
                     cl.File(
                         name=file_name,
-                        content=file_data,
-                        mime="text/csv"
+                        content=excel_buffer.getvalue(),
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     )
                 ]
             ).send()

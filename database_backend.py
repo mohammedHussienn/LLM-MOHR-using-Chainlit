@@ -29,32 +29,59 @@ token_counts = defaultdict(lambda: {'input': 0, 'output': 0, 'calls': 0})
 def count_tokens(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        # Get self instance from args
         self = args[0]
-        
-        # Get the encoding based on the model
         enc = encoding_for_model("gpt-4o")
         
-        # Get the input text from the state (usually the second argument)
         if len(args) > 1 and isinstance(args[1], dict):
             state = args[1]
-            input_text = f"{state.get('question', '')} {state.get('query', '')}"
-            input_tokens = len(enc.encode(input_text))
             
-            # Execute the function
+            # Calculate full prompt input tokens based on class type
+            if isinstance(self, QueryGeneration):
+                full_prompt = self.prompt.format(
+                    input=state['question'],
+                    schema=self.schema,
+                    dialect=self.database.dialect,
+                    top_k=10,
+                    tenant_id=state['tenant_id'],
+                    failed_queries="\n".join(state['failed_queries']) if state['failed_queries'] else "None"
+                )
+                input_tokens = len(enc.encode(full_prompt))
+            
+            elif isinstance(self, QueryValidation):
+                full_prompt = self.prompt.format(
+                    schema=self.schema,
+                    query=state['query']
+                )
+                input_tokens = len(enc.encode(full_prompt))
+            
+            else:
+                # For other classes, keep existing logic
+                input_text = f"{state.get('question', '')} {state.get('query', '')}"
+                input_tokens = len(enc.encode(input_text))
+            
             result = func(*args, **kwargs)
             
-            # Count output tokens
             if isinstance(result, dict):
-                # For report mode, only count the summary message
-                if state.get('mode') == 'r':
-                    output_text = f"Found {result.get('answer', '')}"
+                # Calculate output tokens based on class type
+                if isinstance(self, QueryGeneration):
+                    output_text = json.dumps({
+                        "query": result.get('query', ''),
+                        "column_names": result.get('column_names', [])
+                    })
+                    output_tokens = len(enc.encode(output_text))
+                
+                elif isinstance(self, QueryValidation):
+                    output_text = "VALID" if result.get('valid') else f"INVALID: {result.get('answer', '')}"
+                    output_tokens = len(enc.encode(output_text))
+                
                 else:
-                    output_text = f"{result.get('answer', '')} {result.get('query', '')}"
+                    # For other modes (like report mode)
+                    if state.get('mode') == 'r':
+                        output_text = f"Found {result.get('answer', '')}"
+                    else:
+                        output_text = f"{result.get('answer', '')} {result.get('query', '')}"
+                    output_tokens = len(enc.encode(output_text))
                 
-                output_tokens = len(enc.encode(output_text))
-                
-                # Store token counts with class name
                 func_name = f"{self.__class__.__name__}.{func.__name__}"
                 token_counts[func_name]['input'] += input_tokens
                 token_counts[func_name]['output'] += output_tokens
@@ -164,7 +191,7 @@ class QueryGeneration:
             Return a JSON object in the following format:
             {{
                 "query": "<your SQL query here>",
-                "column_names": ["col1", "col2", "col3"]  // MUST match SELECT columns exactly
+                "column_names": ["col1", "col2", "col3"]  // MUST match SELECT columns exactly BUT if they have the same name, you can use aliases for them 
             }}
             
             Ensure the response is valid JSON and that column_names matches your SELECT statement exactly.
@@ -193,7 +220,29 @@ class QueryGeneration:
             # Handle cases with SET CONTEXT_INFO before SELECT
             if 'SET CONTEXT_INFO' in select_part:
                 select_part = select_part.split('SELECT')[1].strip()
-            actual_columns = [col.strip().split(' AS ')[-1] for col in select_part.split(',')]
+            
+            # Improved column parsing
+            actual_columns = []
+            current_column = []
+            in_parentheses = 0
+            
+            for char in select_part:
+                if char == '(':
+                    in_parentheses += 1
+                elif char == ')':
+                    in_parentheses -= 1
+                elif char == ',' and in_parentheses == 0:
+                    actual_columns.append(''.join(current_column).strip())
+                    current_column = []
+                    continue
+                current_column.append(char)
+            
+            # Add the last column
+            if current_column:
+                actual_columns.append(''.join(current_column).strip())
+            
+            # Clean up column names and handle aliases
+            actual_columns = [col.split(' AS ')[-1].strip() for col in actual_columns]
             
             # Compare with provided column names
             if len(actual_columns) != len(response_dict['column_names']):

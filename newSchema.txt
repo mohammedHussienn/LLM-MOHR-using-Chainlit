@@ -1,5 +1,4 @@
 EMPLOYEES Table (The table includes information related to employees):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identification of each employee.
 MODIFIEDDATE DATETIME : Date and time when the employee record was last modified.
 EMAIL NVARCHAR : Email address of the employee.
@@ -34,7 +33,6 @@ WOWDESKID INT : Identifier for WowDesk integration.
 ISSUSPENDED BIT : Indicates if the employee is suspended.
 
 REQUESTS Table (The table includes information related to employee requests):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identifier for each request.
 DATE DATETIME : Date when the request was created.
 EMPLOYEEID INT : Foreign Key, ID of the employee making the request.
@@ -55,7 +53,6 @@ REFID INT : Reference ID for the request.
 MONTHLYTIMESHEET_ID INT : Identifier for the monthly timesheet.
 
 VACATIONS Table (The table includes employee vacation details):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identifier for the vacation entry.
 FROMDATE DATETIME : Start date of the vacation.
 TODATE DATETIME : End date of the vacation.
@@ -78,7 +75,6 @@ TIMETABLES VARCHAR : Timetables related to the vacation.
 REPLACEMENTCHECKED BIT : Indicates if the replacement has been checked.
 
 EMPLOYEEITEMS Table (The table includes information about items assigned to employees):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identifier for the employee item.
 ITEMID INT : Identifier for the item.
 EQUATIONID INT : Identifier for the equation used.
@@ -89,7 +85,6 @@ ACCRUALACCOUNT INT : Accrual account identifier.
 COSTCENTER INT : Identifier for the cost center.
 
 PLANS Table (The table includes planning information):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identifier for the plan.
 NAME NVARCHAR : Name or description of the plan.
 STARTDATE DATETIME : Start date of the plan.
@@ -99,7 +94,6 @@ MODIFIEDDATE DATETIME : Date and time when the plan was last modified.
 MODIFIEDBY NVARCHAR : User who last modified the plan.
 
 JOBTITLES Table (The table includes job title details):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identifier for the job title.
 ARABICNAME NVARCHAR : Job title in Arabic.
 ENGLISHNAME NVARCHAR : Job title in English.
@@ -107,7 +101,6 @@ DESCRIPTION NVARCHAR : Description of the job title.
 CODE NVARCHAR : Unique code for the job title.
 
 TRANSACTIONS Table (The table includes information related to employee transactions):
-TENANTID INT : Identifier for the tenant.
 ID INT : Primary Key, unique identifier for the transaction.
 TRANSDATETIME DATETIME : Date and time of the transaction.
 TYPE NVARCHAR : Type/category of the transaction.
@@ -128,3 +121,45 @@ CREATEDDATE DATETIME : Date when the transaction was created.
 IMAGEURL NVARCHAR : URL for the image related to the transaction.
 ISSAVED BIT : Indicates if the transaction is saved.
 MOBILENOTES NVARCHAR : Notes entered via mobile.
+
+EMPLOYEEJOBS Table (The table includes information about employees' jobs and their roles within departments):
+ID INT : Primary Key, unique identifier for the employee job entry.
+CODE VARCHAR : Code representing the employee job.
+ARABICNAME NVARCHAR : Employee's name in Arabic.
+ENGLISHNAME NVARCHAR : Employee's name in English.
+EMAIL NVARCHAR : Email address of the employee.
+STATUS TINYINT : Status of the employee job.
+USERNAME NVARCHAR : Username of the employee.
+NATIONALID NVARCHAR : National ID of the employee.
+HASIMAGE BIT : Indicates if the employee has an uploaded image.
+ACTUALWORKINGDATE DATETIME : Date when the employee started actual work.
+DEPARTMENTID INT : Identifier for the department the employee belongs to.
+DEPARTMENTARABICNAME NVARCHAR : Name of the department in Arabic.
+DEPARTMENTENGLISHNAME NVARCHAR : Name of the department in English.
+JOBTITLEID INT : Foreign Key, identifier for the job title assigned to the employee.
+JOBTITLEARABICNAME NVARCHAR : Job title in Arabic.
+JOBTITLEENGLISHNAME NVARCHAR : Job title in English.
+ISHEAD BIT : Indicates if the employee is the head of the department.
+
+TRANSACTIONALERTS Table (The table includes details about transaction-related alerts):
+ID INT : Primary Key, unique identifier for the transaction alert.
+ALERTTYPE INT : Type of the alert raised for the transaction.
+TRANSACTIONID INT : Foreign Key, identifier for the related transaction.
+ISHANDLED BIT : Indicates if the alert has been handled.
+COUNT INT : Number of times the alert has occurred.
+DURATION FLOAT : Total duration of the alert.
+HANDLEDDURATION FLOAT : Duration for which the alert was handled.
+HANDLERS VARCHAR : Information about handlers who managed the alert.
+FROM BIGINT : Start timestamp or range of the alert.
+TO BIGINT : End timestamp or range of the alert.
+
+TRANSACTIONALERTHANDLINGS Table (The table includes information about how transaction alerts are handled):
+ID INT : Primary Key, unique identifier for the transaction alert handling entry.
+DATE DATETIME : Date when the alert was handled.
+NOTE NVARCHAR : Notes regarding the handling of the alert.
+HANDLERTYPE TINYINT : Type of handler managing the alert (e.g., system, manual).
+HANDLINGID INT : Identifier for the handling instance.
+USERID NVARCHAR : User who handled the transaction alert.
+TRANSACTIONALERTID INT : Foreign Key, identifier of the related transaction alert.
+ISCANCELED BIT : Indicates whether the handling was canceled.
+VALUE FLOAT : Value associated with the handling process.

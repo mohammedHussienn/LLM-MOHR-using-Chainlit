@@ -1,0 +1,29 @@
+flowchart TD
+    A[User Input] --> B[Initial State Creation]
+    B --> |State| C[ProcessInput]
+    C --> |Updated State| D[QueryGeneration]
+    D --> |Updated State| E[QueryValidation]
+    
+    E -->|Valid State| F[QueryExecution]
+    E -->|Invalid State| G[Retry QueryGeneration]
+    G --> E
+    
+    F -->|Updated State| H[AnswerGeneration]
+    
+    H -->|Raw Mode| I[Create CSV/DataFrame]
+    H -->|Informative/Conversational Mode| J[Format Response]
+    
+    I --> K[Send Data Response]
+    J --> L[Send Text Response]
+    
+    subgraph State Object
+        M[mode: str]
+        N[tenant_id: Optional[int]]
+        O[question: str]
+        P[query: str]
+        Q[valid: bool]
+        R[result: str]
+        S[answer: str]
+        T[failed_queries: List[str]]
+        U[column_names: List[str]]
+    end
