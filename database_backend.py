@@ -15,6 +15,8 @@ from datetime import datetime, date
 from tiktoken import encoding_for_model
 import functools
 from collections import defaultdict
+from langchain.agents.agent_types import AgentType
+from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 
 
 logging.basicConfig(
@@ -75,7 +77,7 @@ def count_tokens(func):
                     output_tokens = len(enc.encode(output_text))
                 
                 else:
-                    # For other modes (like report mode)
+                    # For other modes (like raw mode)
                     if state.get('mode') == 'r':
                         output_text = f"Found {result.get('answer', '')}"
                     else:
@@ -142,6 +144,7 @@ class State(TypedDict):
     result: str
     answer: str
     failed_queries: List[str]
+    current_df: Optional[pd.DataFrame]
 
 class ProcessInput:
     """Processes initial user input and creates/updates state."""
@@ -320,17 +323,34 @@ class QueryExecution:
         try:
             clean_query = state['query'].replace('```sql', '').replace('```', '').strip()
             result = self.database.run(clean_query)
-            return {**state, 'result': str(result)}
+            
+            # Check if result is empty
+            result_str = str(result)
+            if result_str == '[]' or not result_str:
+                # Add current query to failed queries and invalidate
+                return {
+                    **state,
+                    'result': '',
+                    'valid': False,
+                    'failed_queries': state['failed_queries'] + [clean_query],
+                    'query': ''
+                }
+                
+            return {**state, 'result': result_str}
         except Exception as e:
             logger.error(f"Query execution error: {e}")
-            return {**state, 'result': '', 'valid': False}
+            return {
+                **state,
+                'result': '',
+                'valid': False,
+                'failed_queries': state['failed_queries'] + [clean_query],
+                'query': ''
+            }
 
 class AnswerGeneration:
     """Generates final answer based on mode and updates state."""
     def __init__(self, database):
         self.database = database
-        self.prompts = database.prompts  # Get prompts from database backend
-        self.parser = database.parser    # Get parsers from database backend
     
     @count_tokens
     def process(self, state: State) -> State:
@@ -338,40 +358,73 @@ class AnswerGeneration:
         if not state['result']:
             return {**state, 'answer': "I couldn't find any relevant information. Please try rephrasing your question."}
         
-        # For mode 'r', directly process the result without LLM
-        if state['mode'] == 'r':
-            try:
-                df, message = self.database.create_csv(state['mode'], state['result'], state['column_names'])
-                if df is not None:
-                    return {**state, 'answer': message}
-                return {**state, 'answer': "Failed to process the data"}
-            except Exception as e:
-                logger.error(f"Error in report mode: {e}")
-                return {**state, 'answer': f"Error processing data: {str(e)}"}
+        try:
+            df, message = self.database.create_csv('r', state['result'], state['column_names'])
+            if df is not None:
+                return {**state, 'answer': message}
+            return {**state, 'answer': "Failed to process the data"}
+        except Exception as e:
+            logger.error(f"Error in raw mode: {e}")
+            return {**state, 'answer': f"Error processing data: {str(e)}"}
+
+class DataFrameAgent:
+    """Handles pandas DataFrame analysis using LangChain agents."""
+    
+    def __init__(self, llm=None):
+        """Initialize with optional LLM."""
+        self.llm = llm or ChatOpenAI(temperature=0, model="gpt-4o-mini")
+        self._agent = None
         
-        # For other modes, use LLM
-        llm = self.database.get_llm(state['mode'])
-        prompt = self.database.get_prompt(state['mode'])
-        chain = prompt | llm | self.parser
-        
-        answer = chain.invoke({
-            "input": state['question'],
-            "sql_result": state['result']
-        })
-        
-        return {**state, 'answer': answer}
+    def _create_agent(self, df: pd.DataFrame):
+        """Create pandas DataFrame agent."""
+        if self._agent is None:
+            self._agent = create_pandas_dataframe_agent(
+                self.llm,
+                df,
+                verbose=True,
+                agent_type=AgentType.OPENAI_FUNCTIONS,
+                handle_parsing_errors=True,
+                allow_dangerous_code=True
+            )
+        return self._agent
+    
+    @count_tokens
+    def process(self, state: State) -> State:
+        """Process a question about the current DataFrame."""
+        try:
+            df = state.get('current_df')
+            if df is None or df.empty:
+                return {
+                    **state,
+                    'answer': "No data available to analyze. Please query for data first.",
+                    'mode': 'r'  # Switch back to raw mode if no data
+                }
+            
+            # Create or get pandas DataFrame agent
+            agent = self._create_agent(df)
+            
+            # Run the agent with the user's question
+            response = agent.run(state['question'])
+            
+            return {
+                **state,
+                'answer': response,
+                'mode': 'a'  # Stay in analysis mode
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in DataFrame analysis: {e}")
+            return {
+                **state,
+                'answer': f"Error analyzing data: {str(e)}",
+                'mode': 'a'  # Stay in analysis mode even on error
+            }
 
 class DatabaseBackend:
     """Handles database operations and LLM interactions for SQL queries."""
     def __init__(self, schema_file_path: str):
         self.schema_file_path = schema_file_path
         
-        # Initialize temperature
-        self.temperature = {
-            'i': 0.5,
-            'c': 1
-        }
-
         # Initialize OpenAI client
         self.llm = ChatOpenAI(
             model="gpt-4o",
@@ -398,43 +451,6 @@ class DatabaseBackend:
         )
         
         self.database = SQLDatabase.from_uri(connection_string)
-        
-        # Initialize prompts
-        self.prompts = {
-            'i': PromptTemplate(
-                template="""
-                You are MOHR AI, a helpful database assistant.
-                
-                Original Question: {input}
-                SQL Query Results: {sql_result}
-                
-                Respond in a clear, professional manner.
-                """,
-                input_variables=["input", "sql_result"]
-            ),
-            'c': PromptTemplate(
-                template="""
-                You are MOHR AI, a friendly conversational AI.
-                
-                Original Question: {input}
-                SQL Query Results: {sql_result}
-                
-                Respond in a friendly, conversational tone.
-                """,
-                input_variables=["input", "sql_result"]
-            )
-        }
-
-    def get_prompt(self, mode):
-        """Get prompt template for specified mode."""
-        return self.prompts.get(mode)
-
-    def get_llm(self, mode):
-        """Get LLM instance with mode-specific temperature."""
-        return ChatOpenAI(
-            model="gpt-4o", 
-            temperature=self.temperature[mode]
-        )
 
     def get_tenant_id(self, username):
         """Get tenant ID for username."""
