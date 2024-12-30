@@ -56,13 +56,26 @@ An intelligent chatbot that provides SQL query assistance, data analysis, and vi
 
 ## 📝 Example Cases
 
-### 1. Basic Data Query
+### 1. Viewing Alert Data and analyzing it
+#### Select the tenant you want to view
 ```
-
-## 📚 Documentation
-
-For more detailed information about specific components:
-- See `database_backend.py` for backend logic
-- See `app.py` for application flow
-- Check `examples.txt` for query examples
-- Refer to `newSchema.txt` for database schema
+Tenant: mendel-ai (as an example)
+```
+#### Ask a question about the data
+```
+Question: show me all the employees' names and ids, alert types (with their meaning), and the total minutes of each alert (each alert and its minutes should be in separate columns (i want each employee to have one single row, with all the alerts having separate columns) for july 2024
+```
+#### The system will generate a query, execute it, and return the results in an excel file. 
+#### You can then analyze the data in the excel file. Using three different methods:
+##### 1. Text data analysis
+```
+Question: show me the names of the most late employees 
+```
+##### 2. Image visualization chart
+```
+Question: show me 5 most late people and order it from most late to least late and write their late hours at the end of each bar
+```
+##### 3. PDF visualization charts
+```
+Question: show me all the employees, there should be a legend showing the alert types in the page, also if there are zeros in some alert better to ignore that alert than leaving space for it. i want every alert to be separate in its own bar and make sure the pages are consequent and the graphs are readable
+```
