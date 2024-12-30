@@ -213,7 +213,7 @@ async def main(message: cl.Message):
                 try:
                     # Execute the generated code
                     if analysis_mode == 'pdf':
-                        pdf_path = temp_manager.get_temp_path('.pdf')
+                        pdf_path = temp_manager.get_file_path('.pdf')
                         with PdfPages(pdf_path) as pdf:
                             exec(result_state['answer'])
                             # Save all figures that were generated
@@ -233,7 +233,7 @@ async def main(message: cl.Message):
                         ).send()
                         
                     else:  # image mode
-                        img_path = temp_manager.get_temp_path('.png')
+                        img_path = temp_manager.get_file_path('.png')
                         exec(result_state['answer'])
                         plt.savefig(img_path, bbox_inches='tight', dpi=300)
                         plt.close()

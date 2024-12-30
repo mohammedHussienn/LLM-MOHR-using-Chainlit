@@ -464,17 +464,6 @@ class GraphGenerationAgent:
             if mode not in ('image', 'pdf'):
                 return {**state, 'answer': f"Invalid visualization mode: {mode}", 'mode': 'a'}
 
-            # Create temporary directory if it doesn't exist
-            temp_dir = tempfile.mkdtemp()
-            if mode == 'pdf':
-                temp_file = os.path.join(temp_dir, 'visualization.pdf')
-            else:
-                temp_file = os.path.join(temp_dir, 'visualization.png')
-
-            # Add the temp_file path to the state
-            state['temp_file'] = temp_file
-            state['temp_dir'] = temp_dir
-
             # Generate data info for summary
             data_info = f"""
             Question: {state['question']}
@@ -527,33 +516,41 @@ class GraphGenerationAgent:
             logger.error(f"Error cleaning up temp files: {e}")
 
 class TempFileManager:
-    """Manages temporary files for visualizations.
+    """Manages files for visualizations in a .files directory.
     
-    Handles creation and cleanup of temporary directories and files
-    used for storing visualizations.
+    Handles creation and cleanup of files used for storing visualizations
+    in a dedicated .files directory.
     """
     
     def __init__(self):
-        """Initialize temporary directory."""
-        self.temp_dir = tempfile.mkdtemp()
+        """Initialize .files directory."""
+        self.files_dir = os.path.join(os.getcwd(), '.files')
+        # Create .files directory if it doesn't exist
+        if not os.path.exists(self.files_dir):
+            os.makedirs(self.files_dir)
         
-    def get_temp_path(self, extension: str) -> str:
-        """Get path for a temporary file with given extension.
+    def get_file_path(self, extension: str) -> str:
+        """Get path for a file with given extension in .files directory.
         
         Args:
             extension (str): File extension (e.g., '.pdf', '.png')
             
         Returns:
-            str: Full path to temporary file
+            str: Full path to file
         """
-        return os.path.join(self.temp_dir, f"visualization{extension}")
+        # Create a unique filename using timestamp
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        return os.path.join(self.files_dir, f"visualization_{timestamp}{extension}")
     
     def cleanup(self):
-        """Remove temporary directory and all its contents."""
+        """Remove .files directory and all its contents."""
         try:
-            shutil.rmtree(self.temp_dir)
+            if os.path.exists(self.files_dir):
+                shutil.rmtree(self.files_dir)
+                # Recreate empty directory
+                os.makedirs(self.files_dir)
         except Exception as e:
-            logger.error(f"Error cleaning up temp files: {e}")
+            logger.error(f"Error cleaning up .files directory: {e}")
 
 class DatabaseBackend:
     """Handles database operations and LLM interactions for SQL queries."""
