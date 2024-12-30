@@ -31,12 +31,13 @@ ENGLISHNAME NVARCHAR : Full English name of the employee.
 ESSPASSWORD NCHAR : ESS password for the employee.
 WOWDESKID INT : Identifier for WowDesk integration.
 ISSUSPENDED BIT : Indicates if the employee is suspended.
+EMPLOYEESTATUS TINYINT : Status of the employee, the meaning of the status is {1: Active, 2: Suspended, 3: Inactive}
 
 REQUESTS Table (The table includes information related to employee requests):
 ID INT : Primary Key, unique identifier for each request.
 DATE DATETIME : Date when the request was created.
 EMPLOYEEID INT : Foreign Key, ID of the employee making the request.
-REQUESTTYPE TINYINT : Type of the request.
+REQUESTTYPE TINYINT : Type of the request, the meaning of the type is {1: Vacation, 2: Loan, 3: Permission, 4: Mission, 5: Administrative, 6: Financial, 7: Overtime}
 ISAPPROVED BIT : Indicates if the request is approved.
 ISCANCELED BIT : Indicates if the request is canceled.
 NOTES NVARCHAR : Notes related to the request.
@@ -59,7 +60,7 @@ TODATE DATETIME : End date of the vacation.
 DURATION FLOAT : Duration of the vacation in days.
 EMPLOYEEID INT : Foreign Key, ID of the employee taking the vacation.
 NOTE NVARCHAR : Notes about the vacation.
-VACATIONTYPEID INT : Identifier for the type of vacation.
+VACATIONTYPEID INT : Identifier for the type of vacation. the meaning of the type is {1: Instead, 2: Annual, 3: Periodical, 4: NoBalance, 5: Other, 6: MonthlyPeriodical}
 REVIEWERID INT : ID of the vacation reviewer.
 REPLACEMENTID INT : ID of the employee replacing the requester during the vacation.
 ISCANCELED BIT : Indicates if the vacation is canceled.
@@ -74,7 +75,7 @@ ANOTHERTYPEBALANCE FLOAT : Balance for another type of leave.
 TIMETABLES VARCHAR : Timetables related to the vacation.
 REPLACEMENTCHECKED BIT : Indicates if the replacement has been checked.
 
-EMPLOYEEITEMS Table (The table includes information about items assigned to employees):
+EMPLOYEEITEMS Table (The table includes information about salary items assigned to employees):
 ID INT : Primary Key, unique identifier for the employee item.
 ITEMID INT : Identifier for the item.
 EQUATIONID INT : Identifier for the equation used.
@@ -84,7 +85,7 @@ EXPENSEACCOUNT INT : Expense account identifier.
 ACCRUALACCOUNT INT : Accrual account identifier.
 COSTCENTER INT : Identifier for the cost center.
 
-PLANS Table (The table includes planning information):
+PLANS Table (The table includes shift plans that will be assigned to employees):
 ID INT : Primary Key, unique identifier for the plan.
 NAME NVARCHAR : Name or description of the plan.
 STARTDATE DATETIME : Start date of the plan.
@@ -93,17 +94,17 @@ SHIFTID INT : Identifier for the shift.
 MODIFIEDDATE DATETIME : Date and time when the plan was last modified.
 MODIFIEDBY NVARCHAR : User who last modified the plan.
 
-JOBTITLES Table (The table includes job title details):
+JOBTITLES Table (The table includes job title details or المسميات الوظيفية):
 ID INT : Primary Key, unique identifier for the job title.
 ARABICNAME NVARCHAR : Job title in Arabic.
 ENGLISHNAME NVARCHAR : Job title in English.
 DESCRIPTION NVARCHAR : Description of the job title.
 CODE NVARCHAR : Unique code for the job title.
 
-TRANSACTIONS Table (The table includes information related to employee transactions):
+TRANSACTIONS Table (The table includes information related to employee transactions or الحركات الحضور والانصراف اليومية):
 ID INT : Primary Key, unique identifier for the transaction.
-TRANSDATETIME DATETIME : Date and time of the transaction.
-TYPE NVARCHAR : Type/category of the transaction.
+TRANSDATETIME DATETIME : Date and time of the transaction. {the total working hours for the day is leave datetime -attendance datetime}
+TYPE NVARCHAR : Type/category of the transaction
 EMPLOYEEID INT : Foreign Key, ID of the employee involved in the transaction.
 PLANDETAILID INT : Identifier for plan details.
 ISMANUAL BIT : Indicates if the transaction is manual.
@@ -116,14 +117,14 @@ ISTRUSTED BIT : Indicates if the transaction is trusted.
 LATITUDE FLOAT : Latitude location of the transaction.
 LONGITUDE FLOAT : Longitude location of the transaction.
 LOCATIONID INT : Identifier for the location.
-SOURCE TINYINT : Source of the transaction.
+SOURCE TINYINT : Source of the transaction, the meaning of the source is {1: SystemUser, 2: Service, 3: AttendanceMachine, 4: MobileApp}
 CREATEDDATE DATETIME : Date when the transaction was created.
 IMAGEURL NVARCHAR : URL for the image related to the transaction.
 ISSAVED BIT : Indicates if the transaction is saved.
-MOBILENOTES NVARCHAR : Notes entered via mobile.
+MOBILENOTES NVARCHAR : Notes entered via mobile. 
 
 EMPLOYEEJOBS Table (The table includes information about employees' jobs and their roles within departments):
-ID INT : Primary Key, unique identifier for the employee job entry.
+ID INT : primary key and foreign key to the employees table
 CODE VARCHAR : Code representing the employee job.
 ARABICNAME NVARCHAR : Employee's name in Arabic.
 ENGLISHNAME NVARCHAR : Employee's name in English.
@@ -141,25 +142,82 @@ JOBTITLEARABICNAME NVARCHAR : Job title in Arabic.
 JOBTITLEENGLISHNAME NVARCHAR : Job title in English.
 ISHEAD BIT : Indicates if the employee is the head of the department.
 
-TRANSACTIONALERTS Table (The table includes details about transaction-related alerts):
+TRANSACTIONALERTS Table (The table includes details about transaction-related alerts or التنبيهات الحضور والانصراف):
 ID INT : Primary Key, unique identifier for the transaction alert.
-ALERTTYPE INT : Type of the alert raised for the transaction.
-TRANSACTIONID INT : Foreign Key, identifier for the related transaction.
+ALERTTYPE INT : Type of the alert raised for the transaction, the meaning of the type is {1: Early Attendance (ANE), 2: Late Attendance (ANL), 3: Recurrent Attendance (ANR), 4: Early Leave (LNE), 5: Late Leave (LNL), 6: Recurrent Leave (LNR), 7: Coming in Vacation (CIV), 8: Missed Action (MAC), 9: Absence (ABS), 10: Less than working hours, 11: More than working hours (ANL)}
+TRANSACTIONID INT : Foreign Key, for the transaction that raised the alert
 ISHANDLED BIT : Indicates if the alert has been handled.
 COUNT INT : Number of times the alert has occurred.
 DURATION FLOAT : Total duration of the alert.
 HANDLEDDURATION FLOAT : Duration for which the alert was handled.
 HANDLERS VARCHAR : Information about handlers who managed the alert.
-FROM BIGINT : Start timestamp or range of the alert.
+FROM BIGINT : Start timestamp or range of the alert. 
 TO BIGINT : End timestamp or range of the alert.
 
 TRANSACTIONALERTHANDLINGS Table (The table includes information about how transaction alerts are handled):
 ID INT : Primary Key, unique identifier for the transaction alert handling entry.
 DATE DATETIME : Date when the alert was handled.
 NOTE NVARCHAR : Notes regarding the handling of the alert.
-HANDLERTYPE TINYINT : Type of handler managing the alert (e.g., system, manual).
+HANDLERTYPE TINYINT : Type of handler managing the alert, the meaning of the type is {1: Normal, 2: Vacation, 3: Activity, 4: Permission, 5: Instead, 6: Reverse, 7: Mission, 8: WeekEnd}
 HANDLINGID INT : Identifier for the handling instance.
 USERID NVARCHAR : User who handled the transaction alert.
 TRANSACTIONALERTID INT : Foreign Key, identifier of the related transaction alert.
 ISCANCELED BIT : Indicates whether the handling was canceled.
 VALUE FLOAT : Value associated with the handling process.
+
+EMPLOYEESGROUPS Table (The table includes information about employee groups and their types):
+ID INT : Primary Key, unique identifier for the employee group.
+ARABICNAME NVARCHAR : Name of the group in Arabic.
+ENGLISHNAME NVARCHAR : Name of the group in English.
+GROUPTYPES INT : Type of the group, the meaning of the type is {0: Attendance, 1: General, 2: Salary, 3: Security, 4: Vacation}
+
+REQUESTTYPES Table (The table includes information about the types of requests employees can submit):
+ID INT : Primary Key, unique identifier for the request type.
+ARABICNAME NVARCHAR : Name of the request type in Arabic.
+ENGLISHNAME NVARCHAR : Name of the request type in English.
+TYPE TINYINT : Indicates the category or nature of the request type.
+ISEDITABLE BIT : Indicates if the request type can be edited.
+ACTIVITYID INT : Identifier for the associated activity or process.
+ISEDITABLEBYEMPLOYEE BIT : Indicates if the request type can be edited by the employee.
+DEFAULTVALUE FLOAT : Default value or parameter associated with the request type.
+
+PLANDETAILS Table (The table includes detailed scheduling information for plans): if youre asked about dates in plans, apply it on the dates column here. 
+ID INT : Primary Key, unique identifier for the plan detail.
+DATE DATETIME : The date associated with the plan detail.
+ATTENDSTART TIME : Start of the attendance window.
+ATTENDEXACT TIME : Exact attendance time expected.
+ATTENDEND TIME : End of the attendance window.
+LEAVESTART TIME : Start of the leave window.
+LEAVEEXACT TIME : Exact leave time expected.
+LEAVEEND TIME : End of the leave window.
+PLANID INT : Foreign Key, identifier for the related plan.
+TIMETABLEID NVARCHAR : Identifier for the associated timetable.
+ISABSENCECHECKED BIT : Indicates if absence is tracked for this plan detail.
+ISLEAVECHECKED BIT : Indicates if leave is tracked for this plan detail.
+BORDER TIME : Defines a time boundary for attendance or leave.
+ISVACATION BIT : Indicates if this plan detail is marked as vacation.
+ISEXTENDED BIT : Indicates if the plan detail is extended beyond regular hours.
+MINWORKINGHOURS FLOAT : Minimum working hours required.
+MAXWORKINGHOURS FLOAT : Maximum working hours allowed.
+SHIFTSETTINGID INT : Identifier for the shift settings applied.
+MAXOVERTIME FLOAT : Maximum allowable overtime hours.
+
+SHIFTS Table (The table includes information about work shifts and their configurations):
+ID INT : Primary Key, unique identifier for the shift.
+CYCLES INT : Number of cycles the shift repeats within a specific period.
+STARTDAY INT : Day on which the shift starts.
+ARABICNAME NVARCHAR : Name of the shift in Arabic.
+ENGLISHNAME NVARCHAR : Name of the shift in English.
+SHIFTTYPE INT : Type of shift, the meaning of the type is {1: Pattern, 2: Free, 3: Elastic}
+SHIFTSETTINGID INT : Foreign Key, identifier for the associated shift settings.
+SHIFTUNIT INT : Unit of measurement for the shift, the meaning of the unit is {1: Day, 7: Week, 30: Month}
+MODIFIEDBY NVARCHAR : User who last modified the shift details.
+MODIFIEDDATE DATETIME : Date and time when the shift details were last modified.
+NOTES NVARCHAR : Additional notes or remarks about the shift.
+
+EMPLOYEEPLANS Table (The table includes information about plans assigned to employees):
+ID INT : Primary Key, unique identifier for the employee plan entry.
+FROMDATE DATETIME : Start date of the plan for the employee.
+TODATE DATETIME : End date of the plan for the employee.
+EMPLOYEEID INT : Foreign Key, identifier for the employee assigned to the plan.
+PLANID INT : Foreign Key, identifier for the associated plan.
