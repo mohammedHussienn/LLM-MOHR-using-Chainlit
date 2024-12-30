@@ -12,9 +12,6 @@ from typing_extensions import Annotated
 import logging
 import json
 from datetime import datetime, date
-from tiktoken import encoding_for_model
-import functools
-from collections import defaultdict
 from langchain.agents.agent_types import AgentType
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 import matplotlib.pyplot as plt
@@ -29,117 +26,29 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Global token counter
-token_counts = defaultdict(lambda: {'input': 0, 'output': 0, 'calls': 0})
-
-def count_tokens(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        self = args[0]
-        enc = encoding_for_model("gpt-4o")
-        
-        if len(args) > 1 and isinstance(args[1], dict):
-            state = args[1]
-            
-            # Calculate full prompt input tokens based on class type
-            if isinstance(self, QueryGeneration):
-                full_prompt = self.prompt.format(
-                    input=state['question'],
-                    schema=self.schema,
-                    dialect=self.database.dialect,
-                    top_k=10,
-                    tenant_id=state['tenant_id'],
-                    failed_queries="\n".join(state['failed_queries']) if state['failed_queries'] else "None"
-                )
-                input_tokens = len(enc.encode(full_prompt))
-            
-            elif isinstance(self, QueryValidation):
-                full_prompt = self.prompt.format(
-                    schema=self.schema,
-                    query=state['query']
-                )
-                input_tokens = len(enc.encode(full_prompt))
-            
-            else:
-                # For other classes, keep existing logic
-                input_text = f"{state.get('question', '')} {state.get('query', '')}"
-                input_tokens = len(enc.encode(input_text))
-            
-            result = func(*args, **kwargs)
-            
-            if isinstance(result, dict):
-                # Calculate output tokens based on class type
-                if isinstance(self, QueryGeneration):
-                    output_text = json.dumps({
-                        "query": result.get('query', ''),
-                        "column_names": result.get('column_names', [])
-                    })
-                    output_tokens = len(enc.encode(output_text))
-                
-                elif isinstance(self, QueryValidation):
-                    output_text = "VALID" if result.get('valid') else f"INVALID: {result.get('answer', '')}"
-                    output_tokens = len(enc.encode(output_text))
-                
-                else:
-                    # For other modes (like raw mode)
-                    if state.get('mode') == 'r':
-                        output_text = f"Found {result.get('answer', '')}"
-                    else:
-                        output_text = f"{result.get('answer', '')} {result.get('query', '')}"
-                    output_tokens = len(enc.encode(output_text))
-                
-                func_name = f"{self.__class__.__name__}.{func.__name__}"
-                token_counts[func_name]['input'] += input_tokens
-                token_counts[func_name]['output'] += output_tokens
-                token_counts[func_name]['calls'] += 1
-                
-                logger.info(f"Function {func_name}: Input tokens: {input_tokens}, Output tokens: {output_tokens}")
-            
-            return result
-        return func(*args, **kwargs)
-    return wrapper
-
-def print_token_report():
-    """Print a summary report of token usage."""
-    print("\n" + "="*50)
-    print("TOKEN USAGE REPORT")
-    print("="*50)
-    print(f"{'Function Name':<30} {'Calls':<8} {'Input':<10} {'Output':<10} {'Total':<10}")
-    print("-"*70)
-    
-    total_input = 0
-    total_output = 0
-    total_calls = 0
-    
-    # Sort the functions by total token usage
-    sorted_funcs = sorted(
-        token_counts.items(),
-        key=lambda x: x[1]['input'] + x[1]['output'],
-        reverse=True
-    )
-    
-    for func_name, counts in sorted_funcs:
-        calls = counts['calls']
-        input_tokens = counts['input']
-        output_tokens = counts['output']
-        total = input_tokens + output_tokens
-        
-        total_input += input_tokens
-        total_output += output_tokens
-        total_calls += calls
-        
-        print(f"{func_name:<30} {calls:<8} {input_tokens:<10} {output_tokens:<10} {total:<10}")
-    
-    print("-"*70)
-    print(f"{'TOTAL':<30} {total_calls:<8} {total_input:<10} {total_output:<10} {total_input + total_output:<10}")
-    print("="*70 + "\n")
-
-
 load_dotenv()
 
 class State(TypedDict):
-    """State TypedDict with required fields."""
+    """A TypedDict representing the application state.
+    
+    Attributes:
+        mode (str): Operation mode - 'r' for raw data or 'a' for analysis
+        analysis_mode (Optional[str]): Type of analysis - 'text', 'image', or 'pdf'
+        tenant_id (Optional[int]): ID of the current tenant
+        question (str): User's input question
+        query (str): Generated SQL query
+        column_names (List[str]): Names of columns in the query result
+        valid (bool): Whether the current state is valid
+        result (str): Raw query result
+        answer (str): Processed answer for the user
+        failed_queries (List[str]): List of unsuccessful queries
+        current_df (Optional[pd.DataFrame]): Current working DataFrame
+        summary (Optional[str]): Summary of analysis results
+        temp_file (Optional[str]): Path to temporary visualization file
+        temp_dir (Optional[str]): Path to temporary directory
+    """
     mode: str
+    analysis_mode: Optional[str]
     tenant_id: Optional[int]
     question: str
     query: str
@@ -149,6 +58,9 @@ class State(TypedDict):
     answer: str
     failed_queries: List[str]
     current_df: Optional[pd.DataFrame]
+    summary: Optional[str]
+    temp_file: Optional[str]
+    temp_dir: Optional[str]
 
 class ProcessInput:
     """Processes initial user input and creates/updates state."""
@@ -170,9 +82,16 @@ class QueryGeneration:
             with open(schema_file_path, 'r', encoding='utf-8') as f:
                 self.schema = f.read()
         except UnicodeDecodeError:
-            # Fallback to latin-1 if UTF-8 fails
             with open(schema_file_path, 'r', encoding='latin-1') as f:
                 self.schema = f.read()
+                
+        # Load examples
+        try:
+            with open('examples.txt', 'r', encoding='utf-8') as f:
+                self.examples = f.read()
+        except UnicodeDecodeError:
+            with open('examples.txt', 'r', encoding='latin-1') as f:
+                self.examples = f.read()
                 
         self.database = database
         self.llm = llm or ChatOpenAI(model="gpt-4o", temperature=0)
@@ -193,6 +112,9 @@ class QueryGeneration:
             3. If you're asked to get ANY INFORMATION ABOUT A name or if you're looking for a name, look for the column called "EnglishName" EXCLUSIVELY IN THE EMPLOYEES TABLE
             4. VERY IMPORTANT: The column_names array MUST EXACTLY MATCH the columns in your SELECT statement, in the same order.
             
+            Here are some example question-query pairs to learn from:
+            {examples}
+            
             The following queries were already tried and returned no results, please try a different approach:
             {failed_queries}
 
@@ -209,10 +131,9 @@ class QueryGeneration:
             
             Ensure the response is valid JSON and that column_names matches your SELECT statement exactly.
             ''',
-            input_variables=['input', 'schema', 'dialect', 'top_k', 'tenant_id', 'failed_queries']
+            input_variables=['input', 'schema', 'dialect', 'top_k', 'tenant_id', 'failed_queries', 'examples']
         )
     
-    @count_tokens
     def process(self, state: State) -> State:
         """Generate query and update state."""
         chain = self.prompt | self.llm | self.output_parser
@@ -222,7 +143,8 @@ class QueryGeneration:
             "dialect": self.database.dialect,
             "top_k": 10,
             "tenant_id": state['tenant_id'],
-            "failed_queries": "\n".join(state['failed_queries']) if state['failed_queries'] else "None"
+            "failed_queries": "\n".join(state['failed_queries']) if state['failed_queries'] else "None",
+            "examples": self.examples
         })
         
         # Extract columns from the query
@@ -306,7 +228,6 @@ class QueryValidation:
             input_variables=['schema', 'query']
         )
     
-    @count_tokens
     def process(self, state: State) -> State:
         """Validate query and update state."""
         chain = self.prompt | self.llm | StrOutputParser()
@@ -367,7 +288,6 @@ class AnswerGeneration:
     def __init__(self, database):
         self.database = database
     
-    @count_tokens
     def process(self, state: State) -> State:
         """Generate answer and update state."""
         if not state['result']:
@@ -385,9 +305,9 @@ class AnswerGeneration:
 class DataFrameAgent:
     """Handles pandas DataFrame analysis using LangChain agents."""
     
-    def __init__(self, llm=None):
+    def __init__(self):
         """Initialize with optional LLM."""
-        self.llm = llm or ChatOpenAI(temperature=0, model="gpt-4o-mini")
+        self.llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
         self._agent = None
         
     def _create_agent(self, df: pd.DataFrame):
@@ -403,7 +323,6 @@ class DataFrameAgent:
             )
         return self._agent
     
-    @count_tokens
     def process(self, state: State) -> State:
         """Process a question about the current DataFrame."""
         try:
@@ -436,10 +355,14 @@ class DataFrameAgent:
             }
 
 class GraphGenerationAgent:
-    """Handles generation of visualization code using LLM."""
+    """Handles generation and execution of visualization code.
     
-    def __init__(self, llm=None, df: Optional[pd.DataFrame] = None):
-        self.llm = llm or ChatOpenAI(temperature=0, model="gpt-4o")
+    This class manages the creation of matplotlib-based visualizations,
+    including both single images and multi-page PDF documents.
+    """
+    
+    def __init__(self, df: Optional[pd.DataFrame] = None):
+        self.llm = ChatOpenAI(temperature=0, model="gpt-4o")
         self.df = df
         
     def _get_visualization_prompt(self, question: str, mode: Literal['image', 'pdf']) -> str:
@@ -457,7 +380,25 @@ class GraphGenerationAgent:
         Generate Python code using ONLY matplotlib (plt) to visualize the data.
         The DataFrame is available as 'df' with the following structure:
         {df_info}
-        
+        The DataFrame is large, so generate code that splits the data into chunks of 10-15 rows per page.
+        For example, if visualizing a bar chart of sales by product:
+
+        total_rows = len(df)
+        rows_per_page = 12
+        num_pages = (total_rows + rows_per_page - 1) // rows_per_page
+
+        for page in range(num_pages):
+            start_idx = page * rows_per_page
+            end_idx = min((page + 1) * rows_per_page, total_rows)
+            
+            plt.figure(figsize=(10, 6))
+            page_df = df.iloc[start_idx:end_idx]
+            plt.bar(page_df['product'], page_df['sales'])
+            plt.title(f'Sales by Product (Page {{page+1}} of {{num_pages}})')
+            plt.xlabel('Product')
+            plt.ylabel('Sales')
+            plt.xticks(rotation=45)
+            plt.tight_layout()
         Rules:
         1. ONLY return the Python code, no explanations
         2. Use proper figure sizing (plt.figure(figsize=(10, 6)))
@@ -467,6 +408,7 @@ class GraphGenerationAgent:
         6. ONLY use matplotlib.pyplot as plt
         7. Use ONLY the actual columns from the DataFrame provided
         8. Do not make up or hallucinate data - use only the actual DataFrame columns
+        9. make the visualizations always horizontal, and do not crowd the pages, each page should have around 10-15 rows of data THATS IT
         """
         
         if mode == 'pdf':
@@ -476,14 +418,76 @@ class GraphGenerationAgent:
             
         return f"{base_prompt}\n\nVisualization request: {question}\n\nCode:"
 
-    @count_tokens
+    def _generate_visualization_summary(self, data_info: str, mode: Literal['image', 'pdf']) -> str:
+        """Generate a summary of the visualization insights."""
+        summary_prompt = f"""
+        Analyze this data and provide a concise summary of the key insights.
+        
+        Data Information:
+        {data_info}
+        
+        Format for {'PDF (multiple pages)' if mode == 'pdf' else 'single image'}:
+        
+        1. Describe the main patterns or trends
+        2. Highlight any notable outliers or unusual data points
+        3. {'Explain what to expect in each page' if mode == 'pdf' else 'Explain what the visualization shows'}
+        4. Provide 2-3 key insights from the data
+        
+        Keep the summary clear and concise, focusing on the most important findings.
+        """
+        
+        try:
+            response = self.llm.invoke(summary_prompt)
+            return str(response.content if hasattr(response, 'content') else response)
+        except Exception as e:
+            logger.error(f"Error generating visualization summary: {e}")
+            return "Could not generate summary due to an error."
+
     def process(self, state: State, mode: Literal['image', 'pdf']) -> State:
-        """Generate visualization code based on the question."""
+        """Generate visualization code based on user question.
+        
+        Args:
+            state (State): Current application state
+            mode (Literal['image', 'pdf']): Visualization output format
+            
+        Returns:
+            State: Updated application state with visualization code
+            
+        Raises:
+            Exception: If visualization generation fails
+        """
         try:
             self.df = state.get('current_df')
             if self.df is None:
                 return {**state, 'answer': "No DataFrame available for visualization."}
 
+            if mode not in ('image', 'pdf'):
+                return {**state, 'answer': f"Invalid visualization mode: {mode}", 'mode': 'a'}
+
+            # Create temporary directory if it doesn't exist
+            temp_dir = tempfile.mkdtemp()
+            if mode == 'pdf':
+                temp_file = os.path.join(temp_dir, 'visualization.pdf')
+            else:
+                temp_file = os.path.join(temp_dir, 'visualization.png')
+
+            # Add the temp_file path to the state
+            state['temp_file'] = temp_file
+            state['temp_dir'] = temp_dir
+
+            # Generate data info for summary
+            data_info = f"""
+            Question: {state['question']}
+            Data Shape: {self.df.shape}
+            Columns: {', '.join(self.df.columns)}
+            Sample Statistics:
+            {self.df.describe().to_string()}
+            """
+            
+            # Generate summary first
+            summary = self._generate_visualization_summary(data_info, mode)
+            
+            # Then generate visualization code
             prompt = self._get_visualization_prompt(state['question'], mode)
             if prompt.startswith("Error:"):
                 return {**state, 'answer': prompt, 'mode': 'a'}
@@ -504,20 +508,44 @@ class GraphGenerationAgent:
             if not code or 'seaborn' in code:
                 return {**state, 'answer': "Invalid visualization code generated", 'mode': 'a'}
 
-            return {**state, 'answer': code, 'mode': f'viz_{mode}'}
+            return {**state, 'answer': code, 'mode': f'viz_{mode}', 'summary': summary}
 
         except Exception as e:
             logger.error(f"Error in visualization generation: {e}")
             return {**state, 'answer': f"Error generating visualization code: {str(e)}", 'mode': 'a'}
 
+    def cleanup(self, temp_dir: str):
+        """Clean up temporary visualization files.
+        
+        Args:
+            temp_dir (str): Path to temporary directory to clean up
+        """
+        try:
+            if temp_dir and os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+        except Exception as e:
+            logger.error(f"Error cleaning up temp files: {e}")
+
 class TempFileManager:
-    """Manages temporary files for visualizations."""
+    """Manages temporary files for visualizations.
+    
+    Handles creation and cleanup of temporary directories and files
+    used for storing visualizations.
+    """
     
     def __init__(self):
+        """Initialize temporary directory."""
         self.temp_dir = tempfile.mkdtemp()
         
     def get_temp_path(self, extension: str) -> str:
-        """Get a temporary file path with the given extension."""
+        """Get path for a temporary file with given extension.
+        
+        Args:
+            extension (str): File extension (e.g., '.pdf', '.png')
+            
+        Returns:
+            str: Full path to temporary file
+        """
         return os.path.join(self.temp_dir, f"visualization{extension}")
     
     def cleanup(self):

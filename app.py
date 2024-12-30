@@ -1,9 +1,9 @@
 import chainlit as cl
 from chainlit.input_widget import Select
-from database_backend import DatabaseBackend, State, ProcessInput, QueryGeneration, QueryValidation, QueryExecution, AnswerGeneration, print_token_report, DataFrameAgent, GraphGenerationAgent, TempFileManager
+from database_backend import DatabaseBackend, State, ProcessInput, QueryGeneration, QueryValidation, QueryExecution, AnswerGeneration, DataFrameAgent, GraphGenerationAgent, TempFileManager
 import logging
 import pandas as pd
-from typing import Optional, cast
+from typing import Optional, cast, Literal
 import json
 from datetime import datetime
 import io
@@ -58,20 +58,7 @@ async def send_data_response(df: pd.DataFrame, summary: str, query: Optional[str
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     )
                 ],
-                actions=[
-                    cl.Action(
-                        name="get_new_data",
-                        value="new_data",
-                        label="Get New Data",
-                        description="Query for new data"
-                    ),
-                    cl.Action(
-                        name="ask_current_dataset",
-                        value="current_data",
-                        label="Ask Current Dataset",
-                        description="Ask questions about the current dataset"
-                    )
-                ]
+                actions=await get_mode_buttons('r')
             ).send()
             
             # Store the current dataframe in the user session
@@ -140,16 +127,19 @@ async def on_ask_current_dataset(action):
 @cl.action_callback("mode_analysis")
 async def on_mode_analysis(action):
     cl.user_session.set("mode", "a")
+    cl.user_session.set("analysis_mode", "text")
     await cl.Message("📊 Analysis Mode: Ask your question about the data.").send()
 
 @cl.action_callback("mode_image")
 async def on_mode_image(action):
-    cl.user_session.set("mode", "viz_image")
+    cl.user_session.set("mode", "a")
+    cl.user_session.set("analysis_mode", "image")
     await cl.Message("📈 Image Visualization Mode: Describe the graph you want to create.").send()
 
 @cl.action_callback("mode_pdf")
 async def on_mode_pdf(action):
-    cl.user_session.set("mode", "viz_pdf")
+    cl.user_session.set("mode", "a")
+    cl.user_session.set("analysis_mode", "pdf")
     await cl.Message("📑 PDF Visualization Mode: Describe the graph you want to create.").send()
 
 @cl.on_chat_start
@@ -190,19 +180,21 @@ async def setup_agent(settings):
 @cl.on_message
 async def main(message: cl.Message):
     """Handle user messages."""
-    mode = cl.user_session.get("mode", "r") or "r"  # Ensure mode is never None
+    mode = cl.user_session.get("mode", "r") or "r"
+    analysis_mode = cl.user_session.get("analysis_mode", "text")
     loading_msg = cl.Message(content="⏳ Processing...")
     await loading_msg.send()
     
     try:
-        if mode.startswith("viz_"):
+        if mode == "a":
             df = cl.user_session.get("current_df")
             if df is None:
-                await cl.Message("No dataset available to visualize. Please query for data first.").send()
+                await cl.Message("No dataset available to analyze. Please query for data first.").send()
                 return
             
             state = cast(State, {
                 'mode': mode,
+                'analysis_mode': analysis_mode,
                 'tenant_id': cl.user_session.get("tenant_id"),
                 'question': message.content,
                 'query': '',
@@ -214,49 +206,64 @@ async def main(message: cl.Message):
                 'current_df': df
             })
             
-            viz_agent = GraphGenerationAgent(db.llm)
-            viz_mode = mode.split('_')[1]  # 'image' or 'pdf'
-            if viz_mode not in ('image', 'pdf'):
-                await cl.Message("Invalid visualization mode").send()
-                return
-            result_state = viz_agent.process(state, viz_mode)  # type: ignore
-            
-            try:
-                # Execute the generated code
-                if viz_mode == 'pdf':
-                    pdf_path = temp_manager.get_temp_path('.pdf')
-                    with PdfPages(pdf_path) as pdf:
-                        exec(result_state['answer'])
-                        pdf.savefig()
-                        plt.close()
-                    
-                    await cl.Message(
-                        content="📑 Generated PDF visualization:",
-                        elements=[
-                            cl.File(name="visualization.pdf", path=pdf_path)
-                        ]
-                    ).send()
-                    
-                else:  # image mode
-                    img_path = temp_manager.get_temp_path('.png')
-                    exec(result_state['answer'])
-                    plt.savefig(img_path, bbox_inches='tight', dpi=300)
-                    plt.close()
-                    
-                    await cl.Message(
-                        content="📊 Generated visualization:",
-                        elements=[
-                            cl.Image(name="visualization.png", path=img_path)
-                        ]
-                    ).send()
+            if analysis_mode in ('image', 'pdf'):
+                viz_agent = GraphGenerationAgent(df)
+                result_state = viz_agent.process(state, cast(Literal['image', 'pdf'], analysis_mode))
                 
-            except Exception as e:
-                logger.error(f"Error executing visualization code: {e}")
+                try:
+                    # Execute the generated code
+                    if analysis_mode == 'pdf':
+                        pdf_path = temp_manager.get_temp_path('.pdf')
+                        with PdfPages(pdf_path) as pdf:
+                            exec(result_state['answer'])
+                            # Save all figures that were generated
+                            for fig in plt.get_fignums():
+                                pdf.savefig(fig)
+                                plt.close(fig)
+                        
+                        await cl.Message(
+                            content=f"""📊 Data Analysis Summary:
+{result_state.get('summary', 'No summary available.')}
+
+📑 Generated PDF visualization:""",
+                            elements=[
+                                cl.File(name="visualization.pdf", path=pdf_path)
+                            ],
+                            actions=await get_mode_buttons(mode)
+                        ).send()
+                        
+                    else:  # image mode
+                        img_path = temp_manager.get_temp_path('.png')
+                        exec(result_state['answer'])
+                        plt.savefig(img_path, bbox_inches='tight', dpi=300)
+                        plt.close()
+                        
+                        await cl.Message(
+                            content=f"""📊 Data Analysis Summary:
+{result_state.get('summary', 'No summary available.')}
+
+📈 Generated visualization:""",
+                            elements=[
+                                cl.Image(name="visualization.png", path=img_path)
+                            ],
+                            actions=await get_mode_buttons(mode)
+                        ).send()
+                    
+                except Exception as e:
+                    logger.error(f"Error executing visualization code: {e}")
+                    await cl.Message(
+                        content=f"❌ Error creating visualization: {str(e)}\n\nGenerated code:\n```python\n{result_state['answer']}\n```"
+                    ).send()
+            else:
+                # Text analysis mode
+                df_agent = DataFrameAgent()
+                result_state = df_agent.process(state)
                 await cl.Message(
-                    content=f"❌ Error creating visualization: {str(e)}\n\nGenerated code:\n```python\n{result_state['answer']}\n```"
+                    content=result_state['answer'],
+                    actions=await get_mode_buttons(mode)
                 ).send()
             
-            return
+            return  # Add this return statement to prevent falling through to raw mode
             
         # Raw mode handling
         tenant = cl.user_session.get("tenant")
@@ -337,6 +344,55 @@ async def stop():
 async def end():
     temp_manager.cleanup()
     await cl.Message("👋 Thanks for using MOHR AI Assistant! Have a great day!").send()
+
+async def get_mode_buttons(current_mode: str):
+    """Get appropriate action buttons based on current mode."""
+    # Always include Get New Data unless we're in raw mode
+    buttons = []
+    if current_mode != 'r':
+        buttons.append(
+            cl.Action(
+                name="get_new_data",
+                value="new_data",
+                label="Get New Data",
+                description="Query for new data"
+            )
+        )
+    
+    # Add Analysis button if we're not in analysis text mode
+    if current_mode != "a" or cl.user_session.get("analysis_mode") != "text":
+        buttons.append(
+            cl.Action(
+                name="mode_analysis",
+                value="analysis",
+                label="Analyze Data",
+                description="Ask questions about the data"
+            )
+        )
+    
+    # Add Image button if we're not in image mode
+    if current_mode != "a" or cl.user_session.get("analysis_mode") != "image":
+        buttons.append(
+            cl.Action(
+                name="mode_image",
+                value="image",
+                label="Generate Graph Image",
+                description="Create visualization as image"
+            )
+        )
+    
+    # Add PDF button if we're not in PDF mode
+    if current_mode != "a" or cl.user_session.get("analysis_mode") != "pdf":
+        buttons.append(
+            cl.Action(
+                name="mode_pdf",
+                value="pdf",
+                label="Generate PDF Graph",
+                description="Create visualization as PDF"
+            )
+        )
+    
+    return buttons
 
 if __name__ == "__main__":
     cl.run()
