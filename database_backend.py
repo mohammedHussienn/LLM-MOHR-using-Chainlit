@@ -5,7 +5,7 @@ from langchain_openai import ChatOpenAI
 from langchain_community.agent_toolkits import create_sql_agent
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
-from typing import List, Any, TypedDict, Optional
+from typing import List, Any, TypedDict, Optional, Literal
 import os
 import pandas as pd
 from typing_extensions import Annotated
@@ -17,6 +17,10 @@ import functools
 from collections import defaultdict
 from langchain.agents.agent_types import AgentType
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+import tempfile
+import shutil
 
 
 logging.basicConfig(
@@ -162,8 +166,14 @@ class QueryGeneration:
     """Handles query generation and updates state."""
     def __init__(self, schema_file_path: str, database, llm=None):
         # Initialize with all necessary components
-        with open(schema_file_path, 'r') as f:
-            self.schema = f.read()
+        try:
+            with open(schema_file_path, 'r', encoding='utf-8') as f:
+                self.schema = f.read()
+        except UnicodeDecodeError:
+            # Fallback to latin-1 if UTF-8 fails
+            with open(schema_file_path, 'r', encoding='latin-1') as f:
+                self.schema = f.read()
+                
         self.database = database
         self.llm = llm or ChatOpenAI(model="gpt-4o", temperature=0)
         self.output_parser = JsonOutputParser()
@@ -268,8 +278,13 @@ class QueryGeneration:
 class QueryValidation:
     """Handles query validation and updates state."""
     def __init__(self, schema_file_path: str, llm=None):
-        with open(schema_file_path, 'r') as f:
-            self.schema = f.read()
+        try:
+            with open(schema_file_path, 'r', encoding='utf-8') as f:
+                self.schema = f.read()
+        except UnicodeDecodeError:
+            with open(schema_file_path, 'r', encoding='latin-1') as f:
+                self.schema = f.read()
+                
         self.llm = llm or ChatOpenAI(model="gpt-4o", temperature=0)
         self.prompt = PromptTemplate(
             template='''
@@ -420,10 +435,111 @@ class DataFrameAgent:
                 'mode': 'a'  # Stay in analysis mode even on error
             }
 
+class GraphGenerationAgent:
+    """Handles generation of visualization code using LLM."""
+    
+    def __init__(self, llm=None, df: Optional[pd.DataFrame] = None):
+        self.llm = llm or ChatOpenAI(temperature=0, model="gpt-4o")
+        self.df = df
+        
+    def _get_visualization_prompt(self, question: str, mode: Literal['image', 'pdf']) -> str:
+        if self.df is None:
+            return "Error: No DataFrame available"
+            
+        # Include DataFrame info in the prompt
+        df_info = f"""
+        Available DataFrame columns: {', '.join(self.df.columns)}
+        DataFrame shape: {self.df.shape}
+        Sample data types: {self.df.dtypes.to_dict()}
+        """
+        
+        base_prompt = f"""
+        Generate Python code using ONLY matplotlib (plt) to visualize the data.
+        The DataFrame is available as 'df' with the following structure:
+        {df_info}
+        
+        Rules:
+        1. ONLY return the Python code, no explanations
+        2. Use proper figure sizing (plt.figure(figsize=(10, 6)))
+        3. Include proper titles and labels
+        4. Use plt.tight_layout()
+        5. Don't include plt.show()
+        6. ONLY use matplotlib.pyplot as plt
+        7. Use ONLY the actual columns from the DataFrame provided
+        8. Do not make up or hallucinate data - use only the actual DataFrame columns
+        """
+        
+        if mode == 'pdf':
+            base_prompt += "\n9. The code will be used within a PdfPages context, so don't save the file"
+        else:
+            base_prompt += "\n9. Don't save the file, the code will handle that"
+            
+        return f"{base_prompt}\n\nVisualization request: {question}\n\nCode:"
+
+    @count_tokens
+    def process(self, state: State, mode: Literal['image', 'pdf']) -> State:
+        """Generate visualization code based on the question."""
+        try:
+            self.df = state.get('current_df')
+            if self.df is None:
+                return {**state, 'answer': "No DataFrame available for visualization."}
+
+            prompt = self._get_visualization_prompt(state['question'], mode)
+            if prompt.startswith("Error:"):
+                return {**state, 'answer': prompt, 'mode': 'a'}
+
+            response = self.llm.invoke(prompt)
+            
+            # Extract and clean code
+            try:
+                code = str(response.content if hasattr(response, 'content') else response)
+                if "```python" in code:
+                    code = code.split("```python")[1].split("```")[0].strip()
+                elif "```" in code:
+                    code = code.split("```")[1].strip()
+            except Exception as e:
+                logger.error(f"Error processing code: {e}")
+                return {**state, 'answer': "Error processing visualization code", 'mode': 'a'}
+
+            if not code or 'seaborn' in code:
+                return {**state, 'answer': "Invalid visualization code generated", 'mode': 'a'}
+
+            return {**state, 'answer': code, 'mode': f'viz_{mode}'}
+
+        except Exception as e:
+            logger.error(f"Error in visualization generation: {e}")
+            return {**state, 'answer': f"Error generating visualization code: {str(e)}", 'mode': 'a'}
+
+class TempFileManager:
+    """Manages temporary files for visualizations."""
+    
+    def __init__(self):
+        self.temp_dir = tempfile.mkdtemp()
+        
+    def get_temp_path(self, extension: str) -> str:
+        """Get a temporary file path with the given extension."""
+        return os.path.join(self.temp_dir, f"visualization{extension}")
+    
+    def cleanup(self):
+        """Remove temporary directory and all its contents."""
+        try:
+            shutil.rmtree(self.temp_dir)
+        except Exception as e:
+            logger.error(f"Error cleaning up temp files: {e}")
+
 class DatabaseBackend:
     """Handles database operations and LLM interactions for SQL queries."""
     def __init__(self, schema_file_path: str):
         self.schema_file_path = schema_file_path
+        
+        # Read schema file with UTF-8 encoding
+        try:
+            with open(self.schema_file_path, 'r', encoding='utf-8') as f:
+                self.schema = f.read()
+        except UnicodeDecodeError:
+            # Fallback to latin-1 if UTF-8 fails
+            with open(self.schema_file_path, 'r', encoding='latin-1') as f:
+                self.schema = f.read()
         
         # Initialize OpenAI client
         self.llm = ChatOpenAI(

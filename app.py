@@ -1,6 +1,6 @@
 import chainlit as cl
 from chainlit.input_widget import Select
-from database_backend import DatabaseBackend, State, ProcessInput, QueryGeneration, QueryValidation, QueryExecution, AnswerGeneration, print_token_report, DataFrameAgent
+from database_backend import DatabaseBackend, State, ProcessInput, QueryGeneration, QueryValidation, QueryExecution, AnswerGeneration, print_token_report, DataFrameAgent, GraphGenerationAgent, TempFileManager
 import logging
 import pandas as pd
 from typing import Optional, cast
@@ -8,6 +8,9 @@ import json
 from datetime import datetime
 import io
 import contextlib
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+import traceback
 
 # Setup logging
 logging.basicConfig(
@@ -25,6 +28,9 @@ except ImportError:
 
 # Initialize database backend
 db = DatabaseBackend(schema_file_path="newSchema.txt")
+
+# Add these global variables
+temp_manager = TempFileManager()
 
 async def send_data_response(df: pd.DataFrame, summary: str, query: Optional[str] = None):
     """Send formatted data response to chat."""
@@ -104,12 +110,47 @@ async def on_ask_current_dataset(action):
     if df is not None:
         cl.user_session.set("mode", "a")
         await cl.Message(
-            f"📊 Analysis Mode: You can ask questions about the current dataset ({len(df)} records)\n"
+            content=f"📊 Analysis Mode: You can ask questions about the current dataset ({len(df)} records)\n"
             f"Available columns: {', '.join(df.columns.tolist())}\n\n"
-            "What would you like to know about this data?"
+            "What would you like to do with this data?",
+            actions=[
+                cl.Action(
+                    name="mode_analysis",
+                    value="analysis",
+                    label="Analyze Data",
+                    description="Ask questions about the data"
+                ),
+                cl.Action(
+                    name="mode_image",
+                    value="image",
+                    label="Generate Graph Image",
+                    description="Create visualization as image"
+                ),
+                cl.Action(
+                    name="mode_pdf",
+                    value="pdf",
+                    label="Generate PDF Graph",
+                    description="Create visualization as PDF"
+                )
+            ]
         ).send()
     else:
         await cl.Message("No dataset is currently loaded. Please query for data first.").send()
+
+@cl.action_callback("mode_analysis")
+async def on_mode_analysis(action):
+    cl.user_session.set("mode", "a")
+    await cl.Message("📊 Analysis Mode: Ask your question about the data.").send()
+
+@cl.action_callback("mode_image")
+async def on_mode_image(action):
+    cl.user_session.set("mode", "viz_image")
+    await cl.Message("📈 Image Visualization Mode: Describe the graph you want to create.").send()
+
+@cl.action_callback("mode_pdf")
+async def on_mode_pdf(action):
+    cl.user_session.set("mode", "viz_pdf")
+    await cl.Message("📑 PDF Visualization Mode: Describe the graph you want to create.").send()
 
 @cl.on_chat_start
 async def start():
@@ -149,19 +190,19 @@ async def setup_agent(settings):
 @cl.on_message
 async def main(message: cl.Message):
     """Handle user messages."""
-    mode = cl.user_session.get("mode", "r")
+    mode = cl.user_session.get("mode", "r") or "r"  # Ensure mode is never None
     loading_msg = cl.Message(content="⏳ Processing...")
     await loading_msg.send()
     
     try:
-        if mode == "a":
+        if mode.startswith("viz_"):
             df = cl.user_session.get("current_df")
             if df is None:
-                await cl.Message("No dataset available to analyze. Please query for data first.").send()
+                await cl.Message("No dataset available to visualize. Please query for data first.").send()
                 return
             
             state = cast(State, {
-                'mode': 'a',
+                'mode': mode,
                 'tenant_id': cl.user_session.get("tenant_id"),
                 'question': message.content,
                 'query': '',
@@ -173,14 +214,48 @@ async def main(message: cl.Message):
                 'current_df': df
             })
             
-            df_agent = DataFrameAgent(db.llm)
-            result_state = df_agent.process(state)
+            viz_agent = GraphGenerationAgent(db.llm)
+            viz_mode = mode.split('_')[1]  # 'image' or 'pdf'
+            if viz_mode not in ('image', 'pdf'):
+                await cl.Message("Invalid visualization mode").send()
+                return
+            result_state = viz_agent.process(state, viz_mode)  # type: ignore
             
-            # If mode changed in result_state, update session
-            if result_state['mode'] != state['mode']:
-                cl.user_session.set("mode", result_state['mode'])
+            try:
+                # Execute the generated code
+                if viz_mode == 'pdf':
+                    pdf_path = temp_manager.get_temp_path('.pdf')
+                    with PdfPages(pdf_path) as pdf:
+                        exec(result_state['answer'])
+                        pdf.savefig()
+                        plt.close()
+                    
+                    await cl.Message(
+                        content="📑 Generated PDF visualization:",
+                        elements=[
+                            cl.File(name="visualization.pdf", path=pdf_path)
+                        ]
+                    ).send()
+                    
+                else:  # image mode
+                    img_path = temp_manager.get_temp_path('.png')
+                    exec(result_state['answer'])
+                    plt.savefig(img_path, bbox_inches='tight', dpi=300)
+                    plt.close()
+                    
+                    await cl.Message(
+                        content="📊 Generated visualization:",
+                        elements=[
+                            cl.Image(name="visualization.png", path=img_path)
+                        ]
+                    ).send()
+                
+            except Exception as e:
+                logger.error(f"Error executing visualization code: {e}")
+                await cl.Message(
+                    content=f"❌ Error creating visualization: {str(e)}\n\nGenerated code:\n```python\n{result_state['answer']}\n```"
+                ).send()
             
-            await send_analysis_response(result_state['answer'])
             return
             
         # Raw mode handling
@@ -260,6 +335,7 @@ async def stop():
 
 @cl.on_chat_end
 async def end():
+    temp_manager.cleanup()
     await cl.Message("👋 Thanks for using MOHR AI Assistant! Have a great day!").send()
 
 if __name__ == "__main__":
