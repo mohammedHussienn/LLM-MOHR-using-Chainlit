@@ -1,0 +1,39 @@
+Question: كود الموظف والاسم بالعربي والمسمى الوظيفي والقسم التابع له واسم مجموعات الموظفين واسم الخطة ومواعيد حضور وانصراف الوردية وفئة الوردية ووحدة الوردية ونوع الحركة ووقت الحركة وتاريخ الحركة ونوع التنبيه وعدد دقائق التنبيه وعدد ساعات العمل في شهر 8 
+
+Query: set contect_info 2481
+select e.Code,e.ArabicName, ej.ArabicName, ej.DepartmentArabicName,
+(select STRING_AGG(EmployeesGroups.ArabicName, ', ') from EmployeesGroups where id in (select employeegroupid from EmployeeGroupsEmployees where EmployeeId = e.Id)) AS EmployeeGroups, p.Name,pd.AttendStart,pd.LeaveEnd,s.ShiftType, s.ShiftUnit,s.StartDay,t.TransDateTime,t.[Type],ta.AlertType,ta.Duration 
+from Employees e
+JOIN EmployeeJobs ej on e.Id = ej.Id
+JOIN Transactions t on e.Id = t.EmployeeId
+JOIN PlanDetails pd on t.PlanDetailId = pd.Id
+JOIN Plans p on pd.PlanId = p.Id
+JOIN Shifts s on p.ShiftId = s.Id
+JOIN TransactionAlerts ta on t.Id = ta.TransactionId
+WHERE t.TransDateTime > '2024-08-01' order by t.TransDateTime
+----
+
+Question: كود الموظف والاسم بالعربي والمسمى الوظيفي والقسم التابع له واسم مجموعات الموظفين وعدد أيام الحضور وعدد أيام الغياب وعدد أيام الإجازات وعدد أيام الراحات الأسبوعية وعدد دقائق الاذونات وعدد دقائق الماموريات وأنواع التنبيهات وعدد دقائق التنبيهات (كل موظف في صف واحد) في الشهر 7 لعام 2024
+
+Query: SET CONTEXT_INFO 3258; 
+SELECT e.Code, e.ArabicName, ej.JobTitleArabicName, ej.DepartmentArabicName, 
+(SELECT STRING_AGG(EmployeesGroups.ArabicName, ', ') FROM EmployeesGroups 
+WHERE id IN (SELECT EmployeeGroupId FROM EmployeeGroupsEmployees WHERE EmployeeId = e.Id)) AS EmployeeGroups, 
+(SELECT COUNT(Id) FROM Transactions WHERE EmployeeId = e.Id AND [Type] = 'Attend' AND MONTH(TransDateTime) = 7 AND YEAR(TransDateTime) = 2024) AS AttendDays, 
+(SELECT COUNT(Id) FROM Transactions WHERE EmployeeId = e.Id AND [Type] = 'Absence' AND MONTH(TransDateTime) = 7 AND YEAR(TransDateTime) = 2024) AS AbsenceDays, 
+(SELECT SUM(Duration) FROM Vacations WHERE EmployeeId = e.Id AND MONTH(FROMDATE) = 7 AND YEAR(FROMDATE) = 2024) AS VacationDays, 
+(SELECT COUNT(Id) FROM PlanDetails WHERE Id IN (SELECT PlanDetailId FROM Transactions WHERE EmployeeId = e.Id AND MONTH(TransDateTime) = 7 AND YEAR(TransDateTime) = 2024) AND IsVacation = 1) AS WeekendVacations, 
+(SELECT SUM(Duration) FROM Permissions WHERE EmployeeId = e.Id AND MONTH(Date) = 7 AND YEAR(Date) = 2024) AS Permissions, (SELECT SUM(DATEDIFF(DAY, Missions.[From], Missions.[To])) FROM Missions WHERE EmployeeId = e.Id AND MONTH(Missions.[From]) = 7 AND YEAR(Missions.[From]) = 2024) AS Missions, 
+(SELECT STRING_AGG(AlertType, ', ') FROM (SELECT DISTINCT AlertType FROM TransactionAlerts WHERE TransactionId IN (SELECT Id FROM Transactions WHERE EmployeeId = e.Id AND MONTH(TransDateTime) = 7 AND YEAR(TransDateTime) = 2024)) AS DistinctAlerts) AS AlertTypes, 
+(SELECT SUM(Duration) FROM TransactionAlerts WHERE TransactionId IN (SELECT Id FROM Transactions WHERE EmployeeId = e.Id AND MONTH(TransDateTime) = 7 AND YEAR(TransDateTime) = 2024)) AS AlertDuration FROM Employees e 
+JOIN EmployeeJobs ej ON e.Id = ej.Id
+----
+
+Question: كود الموظف، واسم الموظف، الوعدد ساعات العمل في شهر يوليو 2024 
+Query: SET CONTEXT_INFO 3258; 
+SELECT e.EnglishName, e.code, SUM(DATEDIFF(HOUR, t1.TransDateTime, t2.TransDateTime)) AS TotalWorkingHours FROM Employees e 
+JOIN Transactions t1 ON e.ID = t1.EmployeeID 
+JOIN Transactions t2 ON e.ID = t2.EmployeeID AND t1.TransDateTime < t2.TransDateTime AND t1.[Type] = 'Attend' AND t2.[Type] = 'Leave' 
+where (SELECT CAST(t1.TransDateTime AS DATE)) = (SELECT CAST(t2.TransDateTime AS DATE))  
+and t1.TransDateTime > '2024-07-01' and t1.TransDateTime < '2024-08-01' 
+GROUP by e.code, e.EnglishName
