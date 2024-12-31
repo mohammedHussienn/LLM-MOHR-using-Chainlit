@@ -2,7 +2,52 @@
 
 An intelligent chatbot that provides SQL query assistance, data analysis, and visualization capabilities for the MOHR database system.
 
+## 🚀 Quick Start
+
+### Using Docker
+1. Build the Docker image:
+```bash
+docker build -t mohr-ai .
+```
+
+2. Run the container:
+```bash
+docker run -p 8000:8000 --env-file .env mohr-ai
+```
+
+### Manual Setup
+See [Setup Guide](docs/SETUP.md) for detailed instructions.
+
 ## 🚀 Functionality
+
+### 📚 Database Schema
+
+### Available Tables
+
+1. **Employee Management**
+   - `EMPLOYEES` - Core employee information
+   - `EMPLOYEEITEMS` - Salary items assigned to employees
+   - `EMPLOYEEJOBS` - Employee job roles and departments
+   - `EMPLOYEESGROUPS` - Employee group classifications
+   - `EMPLOYEEPLANS` - Plans assigned to employees
+
+2. **Time and Attendance**
+   - `TRANSACTIONS` - Daily attendance records
+   - `TRANSACTIONALERTS` - Attendance-related alerts
+   - `TRANSACTIONALERTHANDLINGS` - Alert handling records
+
+3. **Planning and Scheduling**
+   - `PLANS` - Shift plans
+   - `PLANDETAILS` - Detailed scheduling information
+   - `SHIFTS` - Work shift configurations
+
+4. **Request Management**
+   - `REQUESTS` - Employee requests
+   - `REQUESTTYPES` - Types of requests available
+   - `VACATIONS` - Vacation records
+
+5. **Organization**
+   - `JOBTITLES` - Job titles/positions (المسميات الوظيفية)
 
 ### Core Features
 - **SQL Query Generation**: Automatically generates SQL queries based on natural language questions

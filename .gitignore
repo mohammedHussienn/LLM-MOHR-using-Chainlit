@@ -23,5 +23,10 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Files
+# Generated files
 .files/
+src/config/*.generated.txt
+
+# Keep config files
+!src/config/newSchema.txt
+!src/config/examples.txt
